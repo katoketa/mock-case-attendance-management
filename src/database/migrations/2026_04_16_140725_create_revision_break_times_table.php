@@ -13,6 +13,9 @@ return new class extends Migration
     {
         Schema::create('revision_break_times', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('revision_attendance_id')->constrained();
+            $table->dateTime('start_break_at');
+            $table->dateTime('end_break_at');
             $table->timestamps();
         });
     }
