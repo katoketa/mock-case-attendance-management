@@ -6,6 +6,7 @@ use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Carbon;
+use App\Models\User;
 
 class RevisionAttendanceSeeder extends Seeder
 {
@@ -14,19 +15,25 @@ class RevisionAttendanceSeeder extends Seeder
      */
     public function run(): void
     {
-        $now = Carbon::today();
-        for ($user_i = 1; $user_i <= 6; $user_i++) {
-            for ($sub_day_j = 1; $sub_day_j <= 3; $sub_day_j++) {
-                $revisionDate = $now->subDays($sub_day_j);
+        $users = User::with('attendances')->get();
+        foreach ($users as $user) {
+            if ($user['id'] > 6) {
+                break;
+            }
+            foreach ($user['attendances'] as $attendance) {
+                if ($attendance['id'] > 5) {
+                    break;
+                }
+                $revisionDate = new Carbon($attendance['punch_in_at']);
                 $punch_in_at = $revisionDate->addHours(9)->addSeconds(random_int(-3600, 3600));
                 $punch_out_at = $revisionDate->addHours(19)->addSeconds(random_int(-3600, 3600));
-                if ($user_i <= 3) {
+                if ($user['id'] <= 3) {
                     $is_approve = false;
                 } else {
                     $is_approve = true;
                 }
                 $params[] = [
-                    'user_id' => $user_i,
+                    'attendance_id' => $attendance['id'],
                     'punch_in_at' => $punch_in_at,
                     'punch_out_at' => $punch_out_at,
                     'remarks' => fake()->realText(30),
@@ -35,7 +42,7 @@ class RevisionAttendanceSeeder extends Seeder
             }
         }
         foreach ($params as $param) {
-            DB::table('revision_attendance')->insert($param);
+            DB::table('revision_attendances')->insert($param);
         }
     }
 }

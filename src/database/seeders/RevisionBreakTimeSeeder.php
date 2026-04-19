@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Carbon;
 use App\Models\RevisionAttendance;
 
 class RevisionBreakTimeSeeder extends Seeder
@@ -16,7 +17,7 @@ class RevisionBreakTimeSeeder extends Seeder
     {
         $revisionAttendances = RevisionAttendance::all();
         foreach ($revisionAttendances as $revision) {
-            $revisionDate = $revision['punch_in_at']->setTime(0, 0, 0);
+            $revisionDate = new Carbon($revision['punch_in_at']);
             $start_break_at = $revisionDate->addHours(12)->addSeconds(random_int(-3600, 3600));
             $end_break_at = $revisionDate->addHours(13)->addSeconds(random_int(-3600, 3600));
             $params[] = [
@@ -26,7 +27,7 @@ class RevisionBreakTimeSeeder extends Seeder
             ];
         }
         foreach ($params as $param) {
-            DB::table('revision_attendances')->insert($param);
+            DB::table('revision_break_times')->insert($param);
         }
     }
 }

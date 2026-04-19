@@ -17,7 +17,7 @@ class BreakTimeSeeder extends Seeder
     {
         $attendances = Attendance::all();
         foreach ($attendances as $attendance) {
-            $attendanceDate = $attendance['punch_in_at']->setTime(0, 0, 0);
+            $attendanceDate = new Carbon($attendance['punch_in_at']);
             $start_break_at = $attendanceDate->addHours(12)->addSeconds(random_int(-3600, 3600));
             $end_break_at = $attendanceDate->addHours(13)->addSeconds(random_int(-3600, 3600));
             $params[] = [
