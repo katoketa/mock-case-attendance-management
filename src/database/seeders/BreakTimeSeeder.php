@@ -5,7 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Carbon;
+use Carbon\CarbonImmutable;
 use App\Models\Attendance;
 
 class BreakTimeSeeder extends Seeder
@@ -17,7 +17,7 @@ class BreakTimeSeeder extends Seeder
     {
         $attendances = Attendance::all();
         foreach ($attendances as $attendance) {
-            $attendanceDate = new Carbon($attendance['punch_in_at']);
+            $attendanceDate = new CarbonImmutable($attendance['attendance_on']);
             $start_break_at = $attendanceDate->addHours(12)->addSeconds(random_int(-3600, 3600));
             $end_break_at = $attendanceDate->addHours(13)->addSeconds(random_int(-3600, 3600));
             $params[] = [

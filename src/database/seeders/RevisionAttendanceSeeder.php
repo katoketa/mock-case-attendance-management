@@ -5,7 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Carbon;
+use Carbon\CarbonImmutable;
 use App\Models\User;
 
 class RevisionAttendanceSeeder extends Seeder
@@ -20,24 +20,22 @@ class RevisionAttendanceSeeder extends Seeder
             if ($user['id'] > 6) {
                 break;
             }
-            foreach ($user['attendances'] as $attendance) {
-                if ($attendance['id'] > 5) {
-                    break;
-                }
-                $revisionDate = new Carbon($attendance['punch_in_at']);
-                $punch_in_at = $revisionDate->addHours(9)->addSeconds(random_int(-3600, 3600));
-                $punch_out_at = $revisionDate->addHours(19)->addSeconds(random_int(-3600, 3600));
+            for ($attendance_i = 0; $attendance_i < 5; $attendance_i++) {
+                $attendance = $user['attendances'][$attendance_i];
+                $revisionDate = new CarbonImmutable($attendance['attendance_on']);
+                $punchInAt = $revisionDate->addHours(9)->addSeconds(random_int(-3600, 3600));
+                $punchOutAt = $revisionDate->addHours(19)->addSeconds(random_int(-3600, 3600));
                 if ($user['id'] <= 3) {
-                    $is_approve = false;
+                    $isApprove = false;
                 } else {
-                    $is_approve = true;
+                    $isApprove = true;
                 }
                 $params[] = [
                     'attendance_id' => $attendance['id'],
-                    'punch_in_at' => $punch_in_at,
-                    'punch_out_at' => $punch_out_at,
+                    'punch_in_at' => $punchInAt,
+                    'punch_out_at' => $punchOutAt,
                     'remarks' => fake()->realText(30),
-                    'is_approve' => $is_approve,
+                    'is_approve' => $isApprove,
                 ];
             }
         }

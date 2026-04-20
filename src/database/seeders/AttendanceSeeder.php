@@ -5,7 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Carbon;
+use Carbon\CarbonImmutable;
 
 class AttendanceSeeder extends Seeder
 {
@@ -14,20 +14,21 @@ class AttendanceSeeder extends Seeder
      */
     public function run(): void
     {
-        $now = Carbon::today();
+        $today = CarbonImmutable::today();
         for ($user_i = 1; $user_i <= DatabaseSeeder::DUMMY_USER_NUM; $user_i++) {
             for ($sub_day_j = 1; $sub_day_j <= 99; $sub_day_j++) {
                 if ($sub_day_j % 10 === 0) {
                     // 10日間に1日データを作成しない
                     continue;
                 }
-                $attendanceDate = $now->subDays($sub_day_j);
-                $punch_in_at = $attendanceDate->addHours(9)->addSeconds(random_int(-3600, 3600));
-                $punch_out_at = $attendanceDate->addHours(19)->addSeconds(random_int(-3600, 3600));
+                $attendanceOn = $today->subDays($sub_day_j);
+                $punchInAt = $attendanceOn->addHours(9)->addSeconds(random_int(-3600, 3600));
+                $punchOutAt = $attendanceOn->addHours(19)->addSeconds(random_int(-3600, 3600));
                 $params[] = [
                     'user_id' => $user_i,
-                    'punch_in_at' => $punch_in_at,
-                    'punch_out_at' => $punch_out_at,
+                    'attendance_on' => $attendanceOn,
+                    'punch_in_at' => $punchInAt,
+                    'punch_out_at' => $punchOutAt,
                     'remarks' => fake()->realText(30),
                 ];
             }
