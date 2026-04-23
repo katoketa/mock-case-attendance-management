@@ -21,12 +21,11 @@ class AttendanceSeeder extends Seeder
                     // 10日間に1日データを作成しない
                     continue;
                 }
-                $attendanceOn = $today->subDays($sub_day_j);
-                $punchInAt = $attendanceOn->addHours(9)->addSeconds(random_int(-3600, 3600));
-                $punchOutAt = $attendanceOn->addHours(19)->addSeconds(random_int(-3600, 3600));
+                $attendanceDate = $today->subDays($sub_day_j);
+                $punchInAt = $attendanceDate->addHours(9)->addSeconds(random_int(-3600, 3600));
+                $punchOutAt = $attendanceDate->addHours(19)->addSeconds(random_int(-3600, 3600));
                 $params[] = [
                     'user_id' => $user_i,
-                    'attendance_on' => $attendanceOn,
                     'punch_in_at' => $punchInAt,
                     'punch_out_at' => $punchOutAt,
                     'remarks' => fake()->realText(30),

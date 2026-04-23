@@ -17,7 +17,7 @@ class RevisionBreakTimeSeeder extends Seeder
     {
         $revisionAttendances = RevisionAttendance::with('attendance')->get();
         foreach ($revisionAttendances as $revision) {
-            $revisionDate = new CarbonImmutable($revision['attendance']['attendance_on']);
+            $revisionDate = new CarbonImmutable($revision['attendance']['punch_in_at'])->setTime(0, 0, 0);
             $startBreakAt = $revisionDate->addHours(12)->addSeconds(random_int(-3600, 3600));
             $endBreakAt = $revisionDate->addHours(13)->addSeconds(random_int(-3600, 3600));
             $params[] = [

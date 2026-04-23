@@ -22,7 +22,7 @@ class RevisionAttendanceSeeder extends Seeder
             }
             for ($attendance_i = 0; $attendance_i < 5; $attendance_i++) {
                 $attendance = $user['attendances'][$attendance_i];
-                $revisionDate = new CarbonImmutable($attendance['attendance_on']);
+                $revisionDate = new CarbonImmutable($attendance['punch_in_at'])->setTime(0, 0, 0);
                 $punchInAt = $revisionDate->addHours(9)->addSeconds(random_int(-3600, 3600));
                 $punchOutAt = $revisionDate->addHours(19)->addSeconds(random_int(-3600, 3600));
                 if ($user['id'] <= 3) {
