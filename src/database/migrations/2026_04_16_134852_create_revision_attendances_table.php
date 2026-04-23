@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('revision_attendances', function (Blueprint $table) {
             $table->id();
             $table->foreignId('attendance_id')->constrained();
-            $table->datetime('punch_in_at');
-            $table->datetime('punch_out_at');
+            $table->dateTime('punch_in_at');
+            $table->dateTime('punch_out_at');
             $table->string('remarks');
             $table->boolean('is_approve');
             $table->timestamps();

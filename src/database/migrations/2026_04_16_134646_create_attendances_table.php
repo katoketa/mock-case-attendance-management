@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('attendances', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained();
-            $table->datetime('punch_in_at');
-            $table->datetime('punch_out_at')->nullable();
+            $table->dateTime('punch_in_at');
+            $table->dateTime('punch_out_at')->nullable();
             $table->string('remarks')->nullable();
             $table->timestamps();
         });
