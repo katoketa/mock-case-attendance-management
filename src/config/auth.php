@@ -114,4 +114,8 @@ return [
 
     'password_timeout' => env('AUTH_PASSWORD_TIMEOUT', 10800),
 
+    // 管理者アカウント設定
+    'admin_name' => env('ADMIN_NAME', 'admin'),
+    'admin_email' => env('ADMIN_EMAIL', 'sample@example.com'),
+    'admin_password' => env('ADMIN_PASSWORD', 'admin_password'),
 ];

@@ -10,16 +10,19 @@ class DatabaseSeeder extends Seeder
 {
     use WithoutModelEvents;
 
+    const DUMMY_USER_NUM = 10;      // 6以上にしてください
+
     /**
      * Seed the application's database.
      */
     public function run(): void
     {
-        // User::factory(10)->create();
+        User::factory(self::DUMMY_USER_NUM)->create();
 
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
-        ]);
+        $this->call(AdminSeeder::class);
+        $this->call(AttendanceSeeder::class);
+        $this->call(RevisionAttendanceSeeder::class);
+        $this->call(BreakTimeSeeder::class);
+        $this->call(RevisionBreakTimeSeeder::class);
     }
 }
