@@ -1,0 +1,44 @@
+.auth-page {
+    width: 600px;
+    margin: 80px auto;
+}
+
+.auth-page__title {
+    text-align: center;
+}
+
+.auth-form {}
+
+.auth-form__label {
+    display: block;
+    margin-top: 50px;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.auth-form__input {
+    display: block;
+    width: 100%;
+    padding: 10px;
+}
+
+.auth-form__button-submit {
+    width: 100%;
+    margin-top: 80px;
+    padding: 5px 0;
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+    background-color: black;
+    border-radius: 3px;
+}
+
+.shift-page__login-register {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.shift-login-register__a {
+    color: #0173cc;
+    text-decoration: none;
+}
