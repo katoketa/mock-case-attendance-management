@@ -7,7 +7,8 @@
 @section('content')
 <article class="auth-page">
     <h1 class="auth-page__title">ログイン</h1>
-    <form action="/login" method="post" class="auth-form">
+    <form action="/login" method="post" class="auth-form" novalidate>
+        @csrf
         <label for="email" class="auth-form__label">メールアドレス</label>
         <input type="email" name="email" id="email" class="auth-form__input">
         <label for="password" class="auth-form__label">パスワード</label>
