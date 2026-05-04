@@ -3,12 +3,14 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class AttendanceController extends Controller
 {
     public function create()
     {
-        $testDate = \Carbon\Carbon::now()->toString();
-        return view('users.attendance', compact('testDate'));
+        $user = Auth::user();
+        $latestAttendance = $user->latestAttendance;
+        return view('users.attendance', compact('latestAttendance'));
     }
 }

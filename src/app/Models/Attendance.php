@@ -31,4 +31,9 @@ class Attendance extends Model
     {
         return $this->hadMany('App\Models\BreakTime');
     }
+
+    public function latestBreakTime()
+    {
+        return $this->hasOne(BreakTime::class)->ofMany('id', 'max');
+    }
 }
