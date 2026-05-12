@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
 use App\Models\Attendance;
+use App\Models\BreakTime;
 
 class AttendanceController extends Controller
 {
@@ -31,6 +32,25 @@ class AttendanceController extends Controller
     {
         $punchOutAt = Carbon::now();
         Auth::user()->latestAttendance->update(['punch_out_at' => $punchOutAt]);
+
+        return redirect('/attendance');
+    }
+
+    public function startBreakTime()
+    {
+        $newBreakTime = [
+            'attendance_id' => Auth::user()->latestAttendance['id'],
+            'start_break_at' => Carbon::now(),
+        ];
+        BreakTime::create($newBreakTime);
+
+        return redirect('/attendance');
+    }
+
+    public function endBreakTime()
+    {
+        $endBreakAt = Carbon::now();
+        Auth::user()->latestAttendance->latestBreakTime->update(['end_break_at' => $endBreakAt]);
 
         return redirect('/attendance');
     }
