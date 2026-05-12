@@ -1,0 +1,65 @@
+.attendance-page {
+    margin: 100px auto;
+}
+
+.attendance-page__content {
+    text-align: center;
+}
+
+.attendance-state {
+    display: inline-block;
+    padding: 5px 15px;
+    background: #c8c8c8;
+    border-radius: 20px;
+}
+
+.attendance__date {
+    margin-top: 20px;
+    font-size: 30px;
+}
+
+.attendance__time {
+    margin-top: 20px;
+    font-size: 60px;
+    font-weight: bold;
+}
+
+.attendance-page__forms {
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+}
+
+.attendance-form {
+    margin-left: 50px;
+}
+
+.attendance-form:last-of-type {
+    margin-right: 50px;
+}
+
+.attendance__button, .break-time__button {
+    display: inline-block;
+    width: 120px;
+    padding: 5px 0;
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+    border: none;
+    border-radius: 10px;
+}
+
+.attendance__button {
+    color: white;
+    background-color: black;
+}
+
+.break-time__button {
+    color: black;
+    background-color: white;
+}
+
+.finish-work-message {
+    font-size: 20px;
+    font-weight: bold;
+}

@@ -4,11 +4,18 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Carbon\Carbon;
 
 class Attendance extends Model
 {
     /** @use HasFactory<\Database\Factories\AttendanceFactory> */
     use HasFactory;
+
+    // 勤務状態定数
+    const ATTENDANCE_STATE_BEFORE_WORK = 0;     // 勤務外
+    const ATTENDANCE_STATE_WORKING = 1;         // 勤務中
+    const ATTENDANCE_STATE_BREAK_TIME = 2;      // 休憩中
+    const ATTENDANCE_STATE_FINISH_WORK = 3;     // 退勤済
 
     protected $fillable = [
         'user_id',
@@ -30,5 +37,27 @@ class Attendance extends Model
     public function breakTimes()
     {
         return $this->hadMany('App\Models\BreakTime');
+    }
+
+    public function latestBreakTime()
+    {
+        return $this->hasOne(BreakTime::class)->ofMany('id', 'max');
+    }
+
+    public function getAttendanceState()
+    {
+        if (new Carbon($this->punch_in_at)->toDateString() === Carbon::now()->format('Y-m-d')) {
+            if (!empty($this->punch_out_at)) {
+                return self::ATTENDANCE_STATE_FINISH_WORK;
+            } else {
+                if(!empty($this->latestBreakTime) && empty($this->latestBreakTime['end_break_at'])) {
+                    return self::ATTENDANCE_STATE_BREAK_TIME;
+                } else {
+                    return self::ATTENDANCE_STATE_WORKING;
+                }
+            }
+        } else {
+            return self::ATTENDANCE_STATE_BEFORE_WORK;
+        }
     }
 }
