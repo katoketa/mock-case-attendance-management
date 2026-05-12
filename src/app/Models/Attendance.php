@@ -46,7 +46,7 @@ class Attendance extends Model
 
     public function getAttendanceState()
     {
-        if ($this->punch_in_at->toDateString() === Carbon::now()->format('Y-m-d')) {
+        if (new Carbon($this->punch_in_at)->toDateString() === Carbon::now()->format('Y-m-d')) {
             if (!empty($this->punch_out_at)) {
                 return self::ATTENDANCE_STATE_FINISH_WORK;
             } else {
