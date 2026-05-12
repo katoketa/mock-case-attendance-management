@@ -10,7 +10,7 @@
     <title>coachtech 勤怠管理アプリ</title>
 </head>
 
-<body>
+<body class="body">
     <header class="header">
         <div class="header-logo">
             <img src="{{ asset('image/COACHTECHヘッダーロゴ.png') }}" alt="coachtech" class="header-logo__img">

@@ -26,16 +26,24 @@ use App\Models\Attendance;
         @if (empty($latestAttendance) || $latestAttendance->getAttendanceState() === Attendance::ATTENDANCE_STATE_BEFORE_WORK)
         <form action="/attendance/punch_in" method="post" class="attendance-form">
             @csrf
-
+            <button type="submit" class="attendance__button">出勤</button>
         </form>
-        <div class="attendance__button">出勤</div>
         @elseif ($latestAttendance->getAttendanceState() === Attendance::ATTENDANCE_STATE_BREAK_TIME)
-        <div class="break-time__button">休憩戻</div>
+        <form action="/attendance/end_break_time" method="post" class="attendance-form">
+            @csrf
+            <button type="submit" class="break-time__button">休憩戻</button>
+        </form>
         @elseif ($latestAttendance->getAttendanceState() === Attendance::ATTENDANCE_STATE_FINISH_WORK)
         <div class="finish-work-message">お疲れ様でした。</div>
         @elseif ($latestAttendance->getAttendanceState() === Attendance::ATTENDANCE_STATE_WORKING)
-        <div class="attendance__button">退勤</div>
-        <div class="break-time__button">休憩入</div>
+        <form action="/attendance/punch_out" method="post" class="attendance-form">
+            @csrf
+            <button type="submit" class="attendance__button">退勤</button>
+        </form>
+        <form action="/attendance/start_break_time" method="post" class="attendance-form">
+            @csrf
+            <button type="submit" class="break-time__button">休憩入</button>
+        </form>
         @endif
     </section>
 </article>

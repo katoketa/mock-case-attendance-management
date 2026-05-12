@@ -31,17 +31,35 @@
 }
 
 .attendance-form {
-
+    margin-left: 50px;
 }
 
-.attendance__button {
+.attendance-form:last-of-type {
+    margin-right: 50px;
+}
+
+.attendance__button, .break-time__button {
     display: inline-block;
     width: 120px;
     padding: 5px 0;
-    color: white;
     font-size: 20px;
     font-weight: bold;
     text-align: center;
-    background: black;
+    border: none;
     border-radius: 10px;
+}
+
+.attendance__button {
+    color: white;
+    background-color: black;
+}
+
+.break-time__button {
+    color: black;
+    background-color: white;
+}
+
+.finish-work-message {
+    font-size: 20px;
+    font-weight: bold;
 }
