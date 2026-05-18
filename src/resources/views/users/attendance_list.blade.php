@@ -3,8 +3,6 @@
 @section('content')
 @php
 use Carbon\Carbon;
-
-$selectMonth = new Carbon($selectDate)->format('m');
 $i = 0;
 @endphp
 <article class="default-page">
