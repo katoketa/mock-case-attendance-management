@@ -54,4 +54,15 @@ class AttendanceController extends Controller
 
         return redirect('/attendance');
     }
+
+    public function index(Request $request)
+    {
+        if (!empty($request->selectDate)) {
+            $selectDate = $request->selectDate;
+        } else {
+            $selectDate= now()->format('Y-m');
+        }
+        $attendances = Auth::user()->attendances()->where('punch_in_at', 'like', $selectDate . '%')->get();
+        return view('users.attendance_list', compact('selectDate', 'attendances'));
+    }
 }
