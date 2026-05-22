@@ -18,8 +18,8 @@ class BreakTimeSeeder extends Seeder
         $attendances = Attendance::all();
         foreach ($attendances as $attendance) {
             $attendanceDate = new CarbonImmutable($attendance['punch_in_at'])->setTime(0, 0, 0);
-            $start_break_at = $attendanceDate->addHours(12)->addSeconds(random_int(-3600, 3600));
-            $end_break_at = $attendanceDate->addHours(13)->addSeconds(random_int(-3600, 3600));
+            $start_break_at = $attendanceDate->addHours(12)->addMinutes(random_int(-60, 60));
+            $end_break_at = $attendanceDate->addHours(13)->addSeconds(random_int(-60, 60));
             $params[] = [
                 'attendance_id' => $attendance['id'],
                 'start_break_at' => $start_break_at,
