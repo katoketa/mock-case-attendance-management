@@ -21,7 +21,7 @@ class AttendanceController extends Controller
     {
         $newAttendance = [
             'user_id' => Auth::id(),
-            'punch_in_at' => Carbon::now(),
+            'punch_in_at' => Carbon::now()->startOfMinute(),
         ];
         Attendance::create($newAttendance);
 
@@ -30,7 +30,7 @@ class AttendanceController extends Controller
 
     public function punchOut()
     {
-        $punchOutAt = Carbon::now();
+        $punchOutAt = Carbon::now()->startOfMinute();
         Auth::user()->latestAttendance->update(['punch_out_at' => $punchOutAt]);
 
         return redirect('/attendance');
@@ -40,7 +40,7 @@ class AttendanceController extends Controller
     {
         $newBreakTime = [
             'attendance_id' => Auth::user()->latestAttendance['id'],
-            'start_break_at' => Carbon::now(),
+            'start_break_at' => Carbon::now()->startOfMinute(),
         ];
         BreakTime::create($newBreakTime);
 
@@ -49,7 +49,7 @@ class AttendanceController extends Controller
 
     public function endBreakTime()
     {
-        $endBreakAt = Carbon::now();
+        $endBreakAt = Carbon::now()->startOfMinute();
         Auth::user()->latestAttendance->latestBreakTime->update(['end_break_at' => $endBreakAt]);
 
         return redirect('/attendance');
@@ -57,12 +57,12 @@ class AttendanceController extends Controller
 
     public function index(Request $request)
     {
-        if (!empty($request->selectDate)) {
-            $selectDate = $request->selectDate;
+        if (!empty($request->date)) {
+            $selectDate = $request->date;
         } else {
-            $selectDate= now()->format('Y-m');
+            $selectDate = now()->format('Y-m');
         }
-        $attendances = Auth::user()->attendances()->where('punch_in_at', 'like', $selectDate . '%')->get();
+        $attendances = Auth::user()->attendances()->where('punch_in_at', 'like', $selectDate . '%')->orderBy('punch_in_at', 'asc')->get();
         return view('users.attendance_list', compact('selectDate', 'attendances'));
     }
 }
