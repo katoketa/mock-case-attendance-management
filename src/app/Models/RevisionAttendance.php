@@ -18,6 +18,11 @@ class RevisionAttendance extends Model
         'remarks',
     ];
 
+    protected $casts = [
+        'punch_in_at' => 'datetime',
+        'punch_out_at' => 'datetime',
+    ];
+
     public function attendance()
     {
         return $this->belongsTo('App\Models\Attendance');

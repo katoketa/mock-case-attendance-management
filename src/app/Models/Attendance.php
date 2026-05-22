@@ -66,25 +66,23 @@ class Attendance extends Model
         }
     }
 
-    public function totalBreakTime()
+    public function totalBreakTimeMinute()
     {
-        $breakTimes = $this->hasMany('App\Models\BreakTime');
         $totalMinute = 0;
-        foreach ($breakTimes as $breakTime) {
+        foreach ($this->breakTimes as $breakTime) {
             $startBreakAt = $breakTime['start_break_at'];
             $endBreakAt = $breakTime['end_break_at'];
-            $difference = $endBreakAt->diffInMinutes($startBreakAt);
+            $difference = $startBreakAt->diffInMinutes($endBreakAt);
             $totalMinute += $difference;
         }
-        return Carbon::createFromDate(0, 0, 0)->addMinutes($totalMinute);
+        return $totalMinute;
     }
 
-    public function totalWorkTime()
+    public function totalWorkTimeMinute()
     {
-        $totalBreakMinute = $this->totalBreakTime()->diffInMinutes(Carbon::createFormDate(0, 0, 0));
-        $totalWorkMinute = $this->punch_in_at->diffInMinutes($this->punch_out_at);
-        $totalWorkMinute -= $totalBreakMinute;
-        $totalWorkTime = Carbon::createFromDate(0, 0, 0)->addMinutes($totalWorkMinute);
-        return $totalWorkTime;
+        $totalBreakMinute = $this->totalBreakTimeMinute();
+        $workMinute = $this->punch_in_at->diffInMinutes($this->punch_out_at);
+        $totalWorkMinute = $workMinute - $totalBreakMinute;
+        return $totalWorkMinute;
     }
 }
