@@ -1,20 +1,22 @@
 @extends('layouts.app')
 
 @section('content')
-@php
-use Carbon\Carbon;
-@endphp
 <article class="default-page">
     <h1 class="default-title">勤怠一覧</h1>
     <ul class="default-change-date__ul">
-        <li>
-            <a href="/attendance/list?date={{ new Carbon($selectDate)->subMonth()->format('Y-m') }}" class="default-change-date__before">前月</a>
+        <li class="default-change-date__li">
+            <a href="/attendance/list?date={{ $selectDate->subMonth()->format('Y-m') }}" class="default-change-date">
+                <img src="{{ asset('image/arrow_back_24dp_B2B2B2_FILL0_wght400_GRAD0_opsz24.svg') }}" alt="←" class="default-change-date__arrow-img">前月
+            </a>
         </li>
-        <li>
-            <h2 class="default-change-date__select-date">{{ new Carbon($selectDate)->format('Y/m') }}</h2>
+        <li class="default-change-date__li">
+            <img src="{{ asset('image/calendar_month_24dp_4B4B4B.svg') }}" alt="🗓️" class="default-change-date__calendar-img">
+            <h2 class="default-change-date__select-date">{{ $selectDate->format('Y/m') }}</h2>
         </li>
-        <li>
-            <a href="/attendance/list?date={{ new Carbon($selectDate)->addMonth()->format('Y-m') }}" class="default-change-date__after">翌月</a>
+        <li class="default-change-date__li">
+            <a href=" /attendance/list?date={{ $selectDate->addMonth()->format('Y-m') }}" class="default-change-date">
+                翌月<img src="{{ asset('image/arrow_forward_24dp_B2B2B2_FILL0_wght400_GRAD0_opsz24.svg') }}" alt="→" class="default-change-date__arrow-img">
+            </a>
         </li>
     </ul>
     <table class="default-table">
@@ -26,36 +28,40 @@ use Carbon\Carbon;
             <th class="default-table__th">合計</th>
             <th class="default-table__th">詳細</th>
         </tr>
+        @php $attendance_j = 0; @endphp
+        @for ($day_i = 0; $selectDate->addDays($day_i)->format('Y-m') === $selectDate->format('Y-m'); $day_i++)
+        @if ($selectDate->addDays($day_i)->format('Y-m-d') > now()->format('Y-m-d'))
+        @break
+        @endif
         @php
-        $i = 0;
+        if (!empty($attendances[$attendance_j])) {
+            $attendance = $attendances[$attendance_j];
+        }
         @endphp
-        @foreach ($attendances as $attendance)
-        @while ($i <= 30)
         <tr class="default-table__tr">
-            <td class="default-table__td">{{ new Carbon($selectDate)->addDays($i)->isoFormat('Y年M月D日(dd)') }}</td>
-            @if (new Carbon($selectDate)->addDays($i)->format('Y-m-d') === new Carbon($attendance['punch_in_at'])->format('Y-m-d'))
-            <td class="default-table__td">{{ $attendance['punch_in_at']->format('H:i') }}</td>
+            <td class="default-table__td">{{ $selectDate->addDays($day_i)->isoFormat('Y年M月D日(dd)') }}</td>
+            @if ($selectDate->addDays($day_i)->format('Y-m-d') === $attendance['punch_in_at']->format('Y-m-d'))
+            <td class=" default-table__td">{{ $attendance['punch_in_at']->format('H:i') }}</td>
+            @if (!empty($attendance['punch_out_at']))
             <td class="default-table__td">{{ $attendance['punch_out_at']->format('H:i') }}</td>
+            @endif
+            @if (!empty($attendance->totalBreakTimeMinute()))
             <td class="default-table__td">{{ sprintf('%d:%02d', (int)$attendance->totalBreakTimeMinute() / 60, $attendance->totalBreakTimeMinute() % 60) }}</td>
+            @endif
+            @if (!empty($attendance->totalWorkTimeMinute()))
             <td class="default-table__td">{{ sprintf('%d:%02d', (int)$attendance->totalWorkTimeMinute() / 60, $attendance->totalWorkTimeMinute() % 60) }}</td>
+            @endif
             <td class="default-table__td">
                 <a href="/attendance/detail/{{ $attendance['id'] }}" class="default-table__a">詳細</a>
             </td>
-            @break
+            @php $attendance_j++; @endphp
             @else
             <td class="default-table__td">
                 <a href="/attendance/detail" class="default-table__a">詳細</a>
             </td>
-            @php
-            $i++;
-            @endphp
             @endif
         </tr>
-        @endwhile
-        @php
-        $i++;
-        @endphp
-        @endforeach
+        @endfor
     </table>
 </article>
 @endsection
