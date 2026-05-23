@@ -37,3 +37,61 @@
     font-size: 20px;
     text-decoration: none;
 }
+
+.default-page {
+    width: 800px;
+    margin: 100px auto;
+}
+
+.default-title {
+    position: relative;
+    padding: 20px;
+}
+
+.default-title::before {
+    display: inline-block;
+    position: absolute;
+    top: 20px;
+    left: -10px;
+    content: "";
+    width: 10px;
+    height: 50px;
+    background: #000;
+}
+
+.default-change-date__ul {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    background: white;
+    border-radius: 10px;
+    list-style: none;
+}
+
+.default-change-date__li {
+    display: flex;
+    align-items: center;
+}
+
+.default-change-date__select-date {
+    display: inline-block;
+    margin: 0 10px;
+    font-size: 20px;
+}
+
+.default-change-date__calendar-img {
+    width: 30px;
+    height: 30px;
+}
+
+.default-change-date {
+    color: #737373;
+    font-size: 16px;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.default-change-date__arrow-img {
+    width: 30px;
+    height: 30px;
+}
