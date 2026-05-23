@@ -71,6 +71,9 @@ class Attendance extends Model
         $totalMinute = 0;
         foreach ($this->breakTimes as $breakTime) {
             $startBreakAt = $breakTime['start_break_at'];
+            if (empty($breakTime['end_break_at'])) {
+                return null;
+            }
             $endBreakAt = $breakTime['end_break_at'];
             $difference = $startBreakAt->diffInMinutes($endBreakAt);
             $totalMinute += $difference;
@@ -80,6 +83,9 @@ class Attendance extends Model
 
     public function totalWorkTimeMinute()
     {
+        if (empty($this->punch_out_at)) {
+            return null;
+        }
         $totalBreakMinute = $this->totalBreakTimeMinute();
         $workMinute = $this->punch_in_at->diffInMinutes($this->punch_out_at);
         $totalWorkMinute = $workMinute - $totalBreakMinute;
