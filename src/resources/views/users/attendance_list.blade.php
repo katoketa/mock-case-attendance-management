@@ -21,7 +21,7 @@
     </ul>
     <table class="default-table">
         <tr class="default-table__tr">
-            <th class="default-table__th">日付</th>
+            <th class="default-table__th align-left">日付</th>
             <th class="default-table__th">出勤</th>
             <th class="default-table__th">退勤</th>
             <th class="default-table__th">休憩</th>
@@ -30,17 +30,14 @@
         </tr>
         @php $attendance_j = 0; @endphp
         @for ($day_i = 0; $selectDate->addDays($day_i)->format('Y-m') === $selectDate->format('Y-m'); $day_i++)
-        @if ($selectDate->addDays($day_i)->format('Y-m-d') > now()->format('Y-m-d'))
-        @break
-        @endif
         @php
         if (!empty($attendances[$attendance_j])) {
             $attendance = $attendances[$attendance_j];
         }
         @endphp
         <tr class="default-table__tr">
-            <td class="default-table__td">{{ $selectDate->addDays($day_i)->isoFormat('Y年M月D日(dd)') }}</td>
-            @if ($selectDate->addDays($day_i)->format('Y-m-d') === $attendance['punch_in_at']->format('Y-m-d'))
+            <td class="default-table__td align-left">{{ $selectDate->addDays($day_i)->isoFormat('MM/DD(dd)') }}</td>
+            @if (!empty($attendance) && $selectDate->addDays($day_i)->format('Y-m-d') === $attendance['punch_in_at']->format('Y-m-d'))
             <td class=" default-table__td">{{ $attendance['punch_in_at']->format('H:i') }}</td>
             @if (!empty($attendance['punch_out_at']))
             <td class="default-table__td">{{ $attendance['punch_out_at']->format('H:i') }}</td>
@@ -56,8 +53,12 @@
             </td>
             @php $attendance_j++; @endphp
             @else
+            <td class="default-table__td"></td>
+            <td class="default-table__td"></td>
+            <td class="default-table__td"></td>
+            <td class="default-table__td"></td>
             <td class="default-table__td">
-                <a href="/attendance/detail" class="default-table__a">詳細</a>
+                <a href="/attendance/detail?date={{ $selectDate->addDays($day_i)->format('Y-m-d') }}" class="default-table__a">詳細</a>
             </td>
             @endif
         </tr>
