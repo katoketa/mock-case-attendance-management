@@ -16,6 +16,11 @@ class RevisionBreakTime extends Model
         'end_break_at',
     ];
 
+    protected $casts = [
+        'start_break_at' => 'datetime',
+        'end_break_at' => 'datetime',
+    ];
+
     public function revisionAttendance()
     {
         return $this->belongsTo('App\Models\RevisionAttendance');

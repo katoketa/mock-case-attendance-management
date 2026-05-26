@@ -24,6 +24,11 @@ class Attendance extends Model
         'remarks',
     ];
 
+    protected $casts = [
+        'punch_in_at' => 'datetime',
+        'punch_out_at' => 'datetime',
+    ];
+
     public function user()
     {
         return $this->belongsTo('App\Models\User');
@@ -36,7 +41,7 @@ class Attendance extends Model
 
     public function breakTimes()
     {
-        return $this->hadMany('App\Models\BreakTime');
+        return $this->hasMany('App\Models\BreakTime');
     }
 
     public function latestBreakTime()
@@ -59,5 +64,31 @@ class Attendance extends Model
         } else {
             return self::ATTENDANCE_STATE_BEFORE_WORK;
         }
+    }
+
+    public function totalBreakTimeMinute()
+    {
+        $totalMinute = 0;
+        foreach ($this->breakTimes as $breakTime) {
+            $startBreakAt = $breakTime['start_break_at'];
+            if (empty($breakTime['end_break_at'])) {
+                return null;
+            }
+            $endBreakAt = $breakTime['end_break_at'];
+            $difference = $startBreakAt->diffInMinutes($endBreakAt);
+            $totalMinute += $difference;
+        }
+        return $totalMinute;
+    }
+
+    public function totalWorkTimeMinute()
+    {
+        if (empty($this->punch_out_at)) {
+            return null;
+        }
+        $totalBreakMinute = $this->totalBreakTimeMinute();
+        $workMinute = $this->punch_in_at->diffInMinutes($this->punch_out_at);
+        $totalWorkMinute = $workMinute - $totalBreakMinute;
+        return $totalWorkMinute;
     }
 }

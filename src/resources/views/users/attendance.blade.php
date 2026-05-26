@@ -9,7 +9,7 @@
 use App\Models\Attendance;
 @endphp
 <article class="attendance-page">
-    <section class="attendance-page__content">
+    <div class="attendance-page__content">
         @if (empty($latestAttendance) || $latestAttendance->getAttendanceState() === Attendance::ATTENDANCE_STATE_BEFORE_WORK)
         <div class="attendance-state">勤務外</div>
         @elseif ($latestAttendance->getAttendanceState() === Attendance::ATTENDANCE_STATE_BREAK_TIME)
@@ -21,8 +21,8 @@ use App\Models\Attendance;
         @endif
         <div class="attendance__date">{{ now()->isoFormat('Y年M月D日(dd)') }}</div>
         <div class="attendance__time">{{ now()->format('H:i') }}</div>
-    </section>
-    <section class="attendance-page__forms">
+    </div>
+    <div class="attendance-page__forms">
         @if (empty($latestAttendance) || $latestAttendance->getAttendanceState() === Attendance::ATTENDANCE_STATE_BEFORE_WORK)
         <form action="/attendance/punch_in" method="post" class="attendance-form">
             @csrf
@@ -45,6 +45,6 @@ use App\Models\Attendance;
             <button type="submit" class="break-time__button">休憩入</button>
         </form>
         @endif
-    </section>
+    </div>
 </article>
 @endsection

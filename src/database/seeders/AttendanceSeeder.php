@@ -22,8 +22,8 @@ class AttendanceSeeder extends Seeder
                     continue;
                 }
                 $attendanceDate = $today->subDays($sub_day_j);
-                $punchInAt = $attendanceDate->addHours(9)->addSeconds(random_int(-3600, 3600));
-                $punchOutAt = $attendanceDate->addHours(19)->addSeconds(random_int(-3600, 3600));
+                $punchInAt = $attendanceDate->addHours(9)->addMinutes(random_int(-60, 60));
+                $punchOutAt = $attendanceDate->addHours(19)->addMinutes(random_int(-60, 60));
                 $params[] = [
                     'user_id' => $user_i,
                     'punch_in_at' => $punchInAt,
