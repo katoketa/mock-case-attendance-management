@@ -14,7 +14,7 @@ class RevisionAttendance extends Model
         'attendance_id',
         'punch_in_at',
         'punch_out_at',
-        'is_approve',
+        'is_approval',
         'remarks',
     ];
 

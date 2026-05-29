@@ -26,16 +26,16 @@ class RevisionAttendanceSeeder extends Seeder
                 $punchInAt = $revisionDate->addHours(9)->addMinutes(random_int(-60, 60));
                 $punchOutAt = $revisionDate->addHours(19)->addMinutes(random_int(-60, 60));
                 if ($user['id'] <= 3) {
-                    $isApprove = false;
+                    $isApproval = false;
                 } else {
-                    $isApprove = true;
+                    $isApproval = true;
                 }
                 $params[] = [
                     'attendance_id' => $attendance['id'],
                     'punch_in_at' => $punchInAt,
                     'punch_out_at' => $punchOutAt,
                     'remarks' => fake()->realText(30),
-                    'is_approve' => $isApprove,
+                    'is_approval' => $isApproval,
                 ];
             }
         }
