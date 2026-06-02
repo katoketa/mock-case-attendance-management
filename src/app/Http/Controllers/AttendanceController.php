@@ -67,4 +67,22 @@ class AttendanceController extends Controller
         $attendances->load('breakTimes');
         return view('users.attendance_list', compact('selectDate', 'attendances'));
     }
+
+    public function detail(Attendance $attendance)
+    {
+        if (empty($attendance)) {
+            redirect('/attendance/list');
+        }
+
+        $user = Auth::user();
+        $canEdit = $attendance->latestRevisionAttendance['is_approval'] ?? true;
+        if ($canEdit) {
+            $showData = $attendance;
+            $breakTimes = $attendance['breakTimes'];
+        } else {
+            $showData = $attendance->latestRevisionAttendance();
+            $breakTimes = $showData['revisionBreakTimes'];
+        }
+        return view('users.attendance_detail', compact('user', 'showData', 'breakTimes', 'canEdit'));
+    }
 }
