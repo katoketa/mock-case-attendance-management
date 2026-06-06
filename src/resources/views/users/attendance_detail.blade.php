@@ -15,7 +15,7 @@
             <button type="submit" class="default-button__submit">修正</button>
         </div>
         @else
-        <div class="pending-approval__message">※承認待ちのため修正はできません。</div>
+        <div class="pending-approval__message">*承認待ちのため修正はできません。</div>
         @endif
     </form>
 </article>
