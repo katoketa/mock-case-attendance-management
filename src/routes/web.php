@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AttendanceController;
+use App\Http\Controllers\RevisionAttendanceController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -15,4 +16,5 @@ Route::middleware('auth')->group(function () {
     Route::post('attendance/end_break_time', [AttendanceController::class, 'endBreakTime']);
     Route::get('/attendance/list', [AttendanceController::class, 'index']);
     Route::get('/attendance/detail/{attendance}', [AttendanceController::class, 'detail']);
+    Route::post('/revision_request', [RevisionAttendanceController::class, 'create']);
 });
