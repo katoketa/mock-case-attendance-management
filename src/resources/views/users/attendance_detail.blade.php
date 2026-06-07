@@ -11,6 +11,7 @@
         @csrf
         @include('partials.attendance_detail_table')
         @if ($canEdit)
+        <input type="hidden" name="attendance_id" value="{{ $showData['id'] }}">
         <div class="default-button">
             <button type="submit" class="default-button__submit">修正</button>
         </div>

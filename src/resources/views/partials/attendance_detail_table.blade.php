@@ -21,13 +21,13 @@
         <td class="detail-table__td">
             <div class="detail-table__td-flex">
                 @if ($canEdit)
-                <input type="time" name="punch_in_at" id="" class="detail-table__input" value="{{ $showData['punch_in_at']->format('h:i') }}">
+                <input type="time" name="punch_in_at" id="" class="detail-table__input" value="{{ $showData['punch_in_at']->format('H:i') }}">
                 <span class="detail-table__td-span"></span>
-                <input type="time" name="punch_out_at" id="" class="detail-table__input" value="{{ $showData['punch_out_at']->format('h:i') }}">
+                <input type="time" name="punch_out_at" id="" class="detail-table__input" value="{{ $showData['punch_out_at']->format('H:i') }}">
                 @else
-                <span class="detail-table__td-span">{{ $showData['punch_in_at']->format('h:i') }}</span>
+                <span class="detail-table__td-span">{{ $showData['punch_in_at']->format('H:i') }}</span>
                 <span class="detail-table__td-span">〜</span>
-                <span class="detail-table__td-span">{{ $showData['punch_out_at']->format('h;i') }}</span>
+                <span class="detail-table__td-span">{{ $showData['punch_out_at']->format('H:i') }}</span>
                 @endif
             </div>
         </td>
@@ -47,13 +47,13 @@
         <td class="detail-table__td">
             <div class="detail-table__td-flex">
                 @if ($canEdit)
-                <input type="time" name="break_times[{{ $breaktime_i }}][start_break_at]" id="" class="detail-table__input" value="{{ $breakTime['start_break_at']->format('h:i') }}">
+                <input type="time" name="break_times[{{ $breaktime_i }}][start_break_at]" id="" class="detail-table__input" value="{{ $breakTime['start_break_at']->format('H:i') }}">
                 <span class="detail-table__td-span">〜</span>
-                <input type="time" name="break_times[{{ $breaktime_i }}][end_break_at]" id="" class="detail-table__input" value="{{ $breakTime['end_break_at']->format('h:i') }}">
+                <input type="time" name="break_times[{{ $breaktime_i }}][end_break_at]" id="" class="detail-table__input" value="{{ $breakTime['end_break_at']->format('H:i') }}">
                 @else
-                <span class="detail-table__td-span">{{ $breakTime['start_break_at']->format('h:i') }}</span>
-                <span class="detail-table__td-span"></span>
-                <span class="detail-table--td-span">{{ $breakTime['end_break_at']->format('h:i') }}</span>
+                <span class="detail-table__td-span">{{ $breakTime['start_break_at']->format('H:i') }}</span>
+                <span class="detail-table__td-span">〜</span>
+                <span class="detail-table__td-span">{{ $breakTime['end_break_at']->format('H:i') }}</span>
                 @endif
             </div>
         </td>
@@ -72,9 +72,9 @@
         <td class="detail-table__td">
             <div class="detail-table__td-flex">
                 @if ($canEdit)
-                <input type="time" name="new_start_break_at" id="" class="detail-table__input" value="{{ $showData['new_start_break_at'] }}">
+                <input type="time" name="new_break_time[start_break_at]" id="" class="detail-table__input" value="{{ $showData['new_start_break_at'] }}">
                 <span class="detail-table__td-span">〜</span>
-                <input type="time" name="new_end_break_at" id="" class="detail-table__input" value="{{ $showData['new_end_break_at'] }}">
+                <input type="time" name="new_break_time[end_break_at]" id="" class="detail-table__input" value="{{ $showData['new_end_break_at'] }}">
                 @else
                 <td class="detail-table__td"></td>
                 @endif
@@ -89,7 +89,7 @@
         </td>
         @else
         <td class="detail-table__td">
-            <span class="detail-table__td-span">{{ $showData['remarks'] }}</span>
+            <div class="detail-table__td-remarks">{{ $showData['remarks'] }}</div>
         </td>
         @endif
     </tr>

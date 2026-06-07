@@ -43,6 +43,10 @@
     text-align: center;
 }
 
+.detail-table__td-remarks {
+    width: 300px;
+}
+
 .detail-table__input {
     text-align: center;
     width: 100px;
