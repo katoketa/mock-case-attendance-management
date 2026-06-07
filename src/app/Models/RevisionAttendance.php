@@ -23,6 +23,10 @@ class RevisionAttendance extends Model
         'punch_out_at' => 'datetime',
     ];
 
+    protected $attributes = [
+        'is_approval' => false,
+    ];
+
     public function attendance()
     {
         return $this->belongsTo('App\Models\Attendance');
