@@ -80,8 +80,8 @@ class AttendanceController extends Controller
             $showData = $attendance;
             $breakTimes = $attendance['breakTimes'];
         } else {
-            $showData = $attendance->latestRevisionAttendance();
-            $breakTimes = $showData['revisionBreakTimes'];
+            $showData = $attendance->latestRevisionAttendance;
+            $breakTimes = $showData->revisionBreakTimes;
         }
         return view('users.attendance_detail', compact('user', 'showData', 'breakTimes', 'canEdit'));
     }
