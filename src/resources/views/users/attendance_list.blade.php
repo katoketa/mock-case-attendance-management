@@ -58,7 +58,7 @@
             <td class="default-table__td"></td>
             <td class="default-table__td"></td>
             <td class="default-table__td">
-                <a href="/attendance/detail?date={{ $selectDate->addDays($day_i)->format('Y-m-d') }}" class="default-table__a">詳細</a>
+                <a href="/attendance/list?date={{ $selectDate->addDays($day_i)->format('Y-m') }}" class="default-table__a">詳細</a>
             </td>
             @endif
         </tr>

@@ -1,6 +1,14 @@
+input, textarea, button {
+    font-family: Inter, sans-serif;
+    letter-spacing: 0.2em;
+    border: 1px solid #e6e6e6;
+    border-radius: 5px;
+}
+
 .body {
     font-family: Inter, sans-serif;
     background-color: #f0eff2;
+    letter-spacing: 0.2em;
 }
 
 .header {
@@ -123,7 +131,7 @@
 .default-table__td {
     padding: 10px;
     text-align: center;
-    border-bottom: 1px solid #e1e1e1;
+    border-bottom: 2px solid #e1e1e1;
 }
 
 .default-table__th:first-of-type, .default-table__td:first-of-type {
@@ -141,4 +149,26 @@
 .default-table__a {
     color: black;
     text-decoration: none;
+}
+
+.default-button {
+    margin-top: 50px;
+    text-align: right;
+}
+
+.default-button__submit {
+    width: 120px;
+    padding: 5px 0;
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+    background: black;
+}
+
+.pending-approval__message {
+    width: 100%;
+    margin-top: 30px;
+    color: red;
+    font-size: 16px;
+    text-align: right;
 }

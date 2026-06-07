@@ -17,7 +17,7 @@ return new class extends Migration
             $table->dateTime('punch_in_at');
             $table->dateTime('punch_out_at');
             $table->string('remarks');
-            $table->boolean('is_approve');
+            $table->boolean('is_approval');
             $table->timestamps();
         });
     }

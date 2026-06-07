@@ -49,6 +49,11 @@ class Attendance extends Model
         return $this->hasOne(BreakTime::class)->ofMany('id', 'max');
     }
 
+    public function latestRevisionAttendance()
+    {
+        return $this->hasOne(RevisionAttendance::class)->ofMany('id', 'max');
+    }
+
     public function getAttendanceState()
     {
         if (new Carbon($this->punch_in_at)->toDateString() === Carbon::now()->format('Y-m-d')) {

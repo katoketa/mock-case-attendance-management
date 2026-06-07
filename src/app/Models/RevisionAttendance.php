@@ -14,13 +14,17 @@ class RevisionAttendance extends Model
         'attendance_id',
         'punch_in_at',
         'punch_out_at',
-        'is_approve',
+        'is_approval',
         'remarks',
     ];
 
     protected $casts = [
         'punch_in_at' => 'datetime',
         'punch_out_at' => 'datetime',
+    ];
+
+    protected $attributes = [
+        'is_approval' => false,
     ];
 
     public function attendance()
