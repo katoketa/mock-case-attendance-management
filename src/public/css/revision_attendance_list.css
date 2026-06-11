@@ -1,0 +1,20 @@
+.revision-attendance__ul {
+    display: flex;
+    margin-bottom: 50px;
+    border-bottom: 1px solid black;
+    list-style: none;
+}
+
+.revision-attendance__li {
+    margin-right: 100px;
+    margin-bottom: 10px;
+}
+
+.revision-attendance__li--select {
+    font-weight: bold;
+}
+
+.revision-attendance__li-a {
+    color: black;
+    text-decoration: none;
+}
