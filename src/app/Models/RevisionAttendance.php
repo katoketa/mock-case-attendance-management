@@ -21,6 +21,7 @@ class RevisionAttendance extends Model
     protected $casts = [
         'punch_in_at' => 'datetime',
         'punch_out_at' => 'datetime',
+        'is_approval' => 'boolean',
     ];
 
     protected $attributes = [
