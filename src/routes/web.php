@@ -17,4 +17,5 @@ Route::middleware('auth')->group(function () {
     Route::get('/attendance/list', [AttendanceController::class, 'index']);
     Route::get('/attendance/detail/{attendance}', [AttendanceController::class, 'detail']);
     Route::post('/revision_request', [RevisionAttendanceController::class, 'create']);
+    Route::get('stamp_correction_request/list', [RevisionAttendanceController::class, 'index']);
 });
