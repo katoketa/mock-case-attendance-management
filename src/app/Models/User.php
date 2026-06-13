@@ -51,8 +51,14 @@ class User extends Authenticatable
     {
         return $this->hasMany('App\Models\Attendance');
     }
+
     public function latestAttendance()
     {
         return $this->hasOne(Attendance::class)->ofMany('punch_in_at', 'max');
+    }
+
+    public function revisionAttendances()
+    {
+        return $this->through('attendances')->has('revisionAttendances');
     }
 }

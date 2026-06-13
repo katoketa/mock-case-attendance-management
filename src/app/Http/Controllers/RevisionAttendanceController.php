@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\RevisionAttendance;
 use App\Models\RevisionBreakTime;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class RevisionAttendanceController extends Controller
 {
@@ -13,7 +14,7 @@ class RevisionAttendanceController extends Controller
         $newRevisionAttendance = $request->only('attendance_id', 'punch_in_at', 'punch_out_at', 'remarks');
         $revisionAttendance = RevisionAttendance::create($newRevisionAttendance);
         $newRevisionBreakTimes = $request->break_times;
-        if ($request->new_break_time) {
+        if ($request->new_break_time['start_break_at'] && $request->new_break_time['end_break_at']) {
             $newRevisionBreakTimes[] = $request->new_break_time;
         }
         if ($newRevisionBreakTimes) {
@@ -23,5 +24,23 @@ class RevisionAttendanceController extends Controller
             }
         }
         return redirect('/attendance/detail/' . $request->attendance_id);
+    }
+
+    public function index(Request $request)
+    {
+        $user = Auth::user();
+        if ($request->select === "approved") {
+            $revisionAttendances = $user->revisionAttendances()->where('is_approval', true)->get();
+        } else {
+            $revisionAttendances = $user->revisionAttendances()->where('is_approval', false)->get();
+        }
+        $select = $request->select;
+        return view('revision_attendance_list', compact('revisionAttendances', 'select'));
+    }
+
+    public function show(RevisionAttendance $revisionAttendance)
+    {
+        $attendance = $revisionAttendance->attendance;
+        return redirect()->route('user.attendance.show', ['attendance' => $attendance['id']]);
     }
 }

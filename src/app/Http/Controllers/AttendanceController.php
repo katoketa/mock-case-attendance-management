@@ -11,7 +11,7 @@ use App\Models\BreakTime;
 
 class AttendanceController extends Controller
 {
-    public function create()
+    public function add()
     {
         $user = Auth::user();
         $latestAttendance = $user->latestAttendance;
@@ -68,7 +68,7 @@ class AttendanceController extends Controller
         return view('users.attendance_list', compact('selectDate', 'attendances'));
     }
 
-    public function detail(Attendance $attendance)
+    public function show(Attendance $attendance)
     {
         if (empty($attendance)) {
             redirect('/attendance/list');
