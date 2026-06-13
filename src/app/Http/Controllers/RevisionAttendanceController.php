@@ -37,4 +37,10 @@ class RevisionAttendanceController extends Controller
         $select = $request->select;
         return view('revision_attendance_list', compact('revisionAttendances', 'select'));
     }
+
+    public function show(RevisionAttendance $revisionAttendance)
+    {
+        $attendance = $revisionAttendance->attendance;
+        return redirect()->route('user.attendance.show', ['attendance' => $attendance['id']]);
+    }
 }
