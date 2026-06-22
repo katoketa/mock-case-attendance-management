@@ -10,17 +10,17 @@
     <ul class="revision-attendance__ul">
         @if ($select === "approved")
         <li class="revision-attendance__li">
-            <a href="/stamp_correction_request/list?select=pending_approval" class="revision-attendance__li-a">承認待ち</a>
+            <a href="{{ route('revision_attendance.index', ['select' => 'pending_approval']) }}" class="revision-attendance__li-a">承認待ち</a>
         </li>
         <li class="revision-attendance__li revision-attendance__li--select">
-            <a href="/stamp_correction_request/list?select=approved" class="revision-attendance__li-a">承認済み</a>
+            <a href="{{ route('revision_attendance.index', ['select' => 'approved']) }}" class="revision-attendance__li-a">承認済み</a>
         </li>
         @else
         <li class="revision-attendance__li revision-attendance__li--select">
-            <a href="/stamp_correction_request/list?select=pending_approval" class="revision-attendance__li-a">承認待ち</a>
+            <a href="{{ route('revision_attendance.index', ['select' => 'pending_approval']) }}" class="revision-attendance__li-a">承認待ち</a>
         </li>
         <li class="revision-attendance__li">
-            <a href="/stamp_correction_request/list?select=approved" class="revision-attendance__li-a">承認済み</a>
+            <a href="{{ route('revision_attendance.index', ['select' => 'approved']) }}" class="revision-attendance__li-a">承認済み</a>
         </li>
         @endif
     </ul>
@@ -55,7 +55,7 @@
                 {{ $revisionAttendance['created_at']->format('Y/m/d') }}
             </td>
             <td class="default-table__td align-left">
-                <a href="/stamp_correction_request/approve/{{ $revisionAttendance['id'] }}" class="default-table__a">詳細</a>
+                <a href="{{ route('revision_attendance.show'), ['revisionAttendance' => revisionAttendance['id']]) }}" class="default-table__a">詳細</a>
             </td>
         </tr>
         @endforeach

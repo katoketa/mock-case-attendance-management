@@ -22,13 +22,13 @@
             <ul class="header-nav__ul">
                 @if (Auth::guard('web')->check())
                 <li class="header-nav__li">
-                    <a href="/attendance" class="header-nav__a">勤怠</a>
+                    <a href="{{ route('attendance.create') }}" class="header-nav__a">勤怠</a>
                 </li>
                 <li class="header-nav__li">
-                    <a href="/attendance/list" class="header-nav__a">勤怠一覧</a>
+                    <a href="{{ route('attendance.index') }}" class="header-nav__a">勤怠一覧</a>
                 </li>
                 <li class="header-nav__li">
-                    <a href="/stamp_correction_request/list" class="header-nav__a">申請</a>
+                    <a href="{{ route('revision_attendance.index') }}" class="header-nav__a">申請</a>
                 </li>
                 <li class="header-nav__li">
                     <a href="/logout" class="header-nav__a">ログアウト</a>
@@ -41,7 +41,7 @@
                     <a href="admin/staff/list" class="header-nav__a">スタッフ一覧</a>
                 </li>
                 <li class="header-nav__li">
-                    <a href="stamp_correction_request/list" class="header-nav__a">申請一覧</a>
+                    <a href="{{ route('revision_attendance.index') }}" class="header-nav__a">申請一覧</a>
                 </li>
                 <li class="header-nav__li">
                     <a href="/logout" class="header-nav__a">ログアウト</a>
