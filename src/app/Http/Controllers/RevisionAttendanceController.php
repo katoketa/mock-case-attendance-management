@@ -23,7 +23,7 @@ class RevisionAttendanceController extends Controller
                 RevisionBreakTime::create($newRevisionBreakTime);
             }
         }
-        return redirect('/attendance/detail/' . $request->attendance_id);
+        return redirect()->route('attendance.show', ['attendance' => $request->attendance_id]);
     }
 
     public function index(Request $request)
@@ -41,6 +41,6 @@ class RevisionAttendanceController extends Controller
     public function show(RevisionAttendance $revisionAttendance)
     {
         $attendance = $revisionAttendance->attendance;
-        return redirect()->route('user.attendance.show', ['attendance' => $attendance['id']]);
+        return redirect()->route('attendance.show', ['attendance' => $attendance['id']]);
     }
 }

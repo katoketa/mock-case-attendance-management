@@ -24,23 +24,23 @@ use App\Models\Attendance;
     </div>
     <div class="attendance-page__forms">
         @if (empty($latestAttendance) || $latestAttendance->getAttendanceState() === Attendance::ATTENDANCE_STATE_BEFORE_WORK)
-        <form action="/attendance/punch_in" method="post" class="attendance-form">
+        <form action="{{ route('attendance.punch_in') }}" method="post" class="attendance-form">
             @csrf
             <button type="submit" class="attendance__button">出勤</button>
         </form>
         @elseif ($latestAttendance->getAttendanceState() === Attendance::ATTENDANCE_STATE_BREAK_TIME)
-        <form action="/attendance/end_break_time" method="post" class="attendance-form">
+        <form action="{{ route('attendance.end_break_time') }}" method="post" class="attendance-form">
             @csrf
             <button type="submit" class="break-time__button">休憩戻</button>
         </form>
         @elseif ($latestAttendance->getAttendanceState() === Attendance::ATTENDANCE_STATE_FINISH_WORK)
         <div class="finish-work-message">お疲れ様でした。</div>
         @elseif ($latestAttendance->getAttendanceState() === Attendance::ATTENDANCE_STATE_WORKING)
-        <form action="/attendance/punch_out" method="post" class="attendance-form">
+        <form action="{{ route('attendance.punch_out') }}" method="post" class="attendance-form">
             @csrf
             <button type="submit" class="attendance__button">退勤</button>
         </form>
-        <form action="/attendance/start_break_time" method="post" class="attendance-form">
+        <form action="{{ route('attendance.start_break_time') }}" method="post" class="attendance-form">
             @csrf
             <button type="submit" class="break-time__button">休憩入</button>
         </form>

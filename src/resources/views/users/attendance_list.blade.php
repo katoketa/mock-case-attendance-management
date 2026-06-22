@@ -5,7 +5,7 @@
     <h1 class="default-title">勤怠一覧</h1>
     <ul class="default-change-date__ul">
         <li class="default-change-date__li">
-            <a href="/attendance/list?date={{ $selectDate->subMonth()->format('Y-m') }}" class="default-change-date">
+            <a href="{{ route('attendance.index', ['date' => $selectDate->subMonth()->format('Y-m')]) }}" class="default-change-date">
                 <img src="{{ asset('image/arrow_back_24dp_B2B2B2_FILL0_wght400_GRAD0_opsz24.svg') }}" alt="←" class="default-change-date__arrow-img">前月
             </a>
         </li>
@@ -14,7 +14,7 @@
             <h2 class="default-change-date__select-date">{{ $selectDate->format('Y/m') }}</h2>
         </li>
         <li class="default-change-date__li">
-            <a href=" /attendance/list?date={{ $selectDate->addMonth()->format('Y-m') }}" class="default-change-date">
+            <a href="{{ route('attendance.index', ['date' => $selectDate->addMonth()->format('Y-m')]) }}" class="default-change-date">
                 翌月<img src="{{ asset('image/arrow_forward_24dp_B2B2B2_FILL0_wght400_GRAD0_opsz24.svg') }}" alt="→" class="default-change-date__arrow-img">
             </a>
         </li>
@@ -49,7 +49,7 @@
             <td class="default-table__td">{{ sprintf('%d:%02d', (int)$attendance->totalWorkTimeMinute() / 60, $attendance->totalWorkTimeMinute() % 60) }}</td>
             @endif
             <td class="default-table__td">
-                <a href="/attendance/detail/{{ $attendance['id'] }}" class="default-table__a">詳細</a>
+                <a href="{{ route('attendance.show', ['attendance' => $attendance['id']]) }}" class="default-table__a">詳細</a>
             </td>
             @php $attendance_j++; @endphp
             @else
@@ -58,7 +58,7 @@
             <td class="default-table__td"></td>
             <td class="default-table__td"></td>
             <td class="default-table__td">
-                <a href="/attendance/list?date={{ $selectDate->addDays($day_i)->format('Y-m') }}" class="default-table__a">詳細</a>
+                <a href="{{ route('attendance.index', ['date' => $selectDate->addDays($day_i)->format('Y-m')]) }}" class="default-table__a">詳細</a>
             </td>
             @endif
         </tr>

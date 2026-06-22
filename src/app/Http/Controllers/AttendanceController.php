@@ -11,7 +11,7 @@ use App\Models\BreakTime;
 
 class AttendanceController extends Controller
 {
-    public function add()
+    public function create()
     {
         $user = Auth::user();
         $latestAttendance = $user->latestAttendance;
@@ -26,7 +26,7 @@ class AttendanceController extends Controller
         ];
         Attendance::create($newAttendance);
 
-        return redirect('/attendance');
+        return redirect()->route('attendance.create');
     }
 
     public function punchOut()
@@ -34,7 +34,7 @@ class AttendanceController extends Controller
         $punchOutAt = Carbon::now()->startOfMinute();
         Auth::user()->latestAttendance->update(['punch_out_at' => $punchOutAt]);
 
-        return redirect('/attendance');
+        return redirect()->route('attendance.create');
     }
 
     public function startBreakTime()
@@ -45,7 +45,7 @@ class AttendanceController extends Controller
         ];
         BreakTime::create($newBreakTime);
 
-        return redirect('/attendance');
+        return redirect()->route('attendance.create');
     }
 
     public function endBreakTime()
@@ -53,7 +53,7 @@ class AttendanceController extends Controller
         $endBreakAt = Carbon::now()->startOfMinute();
         Auth::user()->latestAttendance->latestBreakTime->update(['end_break_at' => $endBreakAt]);
 
-        return redirect('/attendance');
+        return redirect()->route('attendance.create');
     }
 
     public function index(Request $request)
@@ -71,7 +71,7 @@ class AttendanceController extends Controller
     public function show(Attendance $attendance)
     {
         if (empty($attendance)) {
-            redirect('/attendance/list');
+            redirect()->route('attendance.index');
         }
 
         $user = Auth::user();
