@@ -16,7 +16,7 @@ class AdminAuthController extends Controller
         {
             $credentials = $request->only('email', 'password');
             if (Auth::guard('admin')->attempt($credentials)) {
-                return redirect()->intended('admin.index');
+                return redirect()->intended(route('admin.index'));
             }
 
             return back()->withInput();
@@ -24,6 +24,6 @@ class AdminAuthController extends Controller
 
         public function index()
         {
-            return redirect()->route('')
+            return redirect()->route('admin.attendance.index');
         }
 }
