@@ -1,24 +1,13 @@
 @extends('layouts.app')
 
+@section('css')
+<link rel="stylesheet" href="{{ asset('css/attendance_date_changer.css') }}">
+@endsection
+
 @section('content')
 <article class="default-page">
     <h1 class="default-title">勤怠一覧</h1>
-    <ul class="default-change-date__ul">
-        <li class="default-change-date__li">
-            <a href="{{ route('attendance.index', ['date' => $selectDate->subMonth()->format('Y-m')]) }}" class="default-change-date">
-                <img src="{{ asset('image/arrow_back_24dp_B2B2B2_FILL0_wght400_GRAD0_opsz24.svg') }}" alt="←" class="default-change-date__arrow-img">前月
-            </a>
-        </li>
-        <li class="default-change-date__li">
-            <img src="{{ asset('image/calendar_month_24dp_4B4B4B.svg') }}" alt="🗓️" class="default-change-date__calendar-img">
-            <h2 class="default-change-date__select-date">{{ $selectDate->format('Y/m') }}</h2>
-        </li>
-        <li class="default-change-date__li">
-            <a href="{{ route('attendance.index', ['date' => $selectDate->addMonth()->format('Y-m')]) }}" class="default-change-date">
-                翌月<img src="{{ asset('image/arrow_forward_24dp_B2B2B2_FILL0_wght400_GRAD0_opsz24.svg') }}" alt="→" class="default-change-date__arrow-img">
-            </a>
-        </li>
-    </ul>
+    @include('components.attendance_date_changer', ['selectInterval' => 'month'])
     <table class="default-table">
         <tr class="default-table__tr">
             <th class="default-table__th align-left">日付</th>

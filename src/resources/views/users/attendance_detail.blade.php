@@ -9,7 +9,7 @@
     <h1 class="default-title">勤怠詳細</h1>
     <form action="{{ route('revision_attendance.request') }}" method="post">
         @csrf
-        @include('partials.attendance_detail_table')
+        @include('components.attendance_detail_table')
         @if ($canEdit)
         <input type="hidden" name="attendance_id" value="{{ $showData['id'] }}">
         <div class="default-button">
