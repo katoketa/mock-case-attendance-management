@@ -7,11 +7,10 @@
 @section('content')
 <article class="default-page">
     <h1 class="default-title">勤怠詳細</h1>
-    <form action="{{ route('revision_attendance.request') }}" method="post">
+    <form action="{{ route('revision_attendance.store') }}" method="post">
         @csrf
         @include('components.attendance_detail_table')
         @if ($canEdit)
-        <input type="hidden" name="attendance_id" value="{{ $showData['id'] }}">
         <div class="default-button">
             <button type="submit" class="default-button__submit">修正</button>
         </div>

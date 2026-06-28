@@ -9,9 +9,11 @@ use Illuminate\Support\Facades\Auth;
 
 class RevisionAttendanceController extends Controller
 {
-    public function create(Request $request)
+    public function store(Request $request)
     {
         $newRevisionAttendance = $request->only('attendance_id', 'punch_in_at', 'punch_out_at', 'remarks');
+        $newRevisionAttendance['punch_in_at'] = $request->date . $newRevisionAttendance['punch_in_at'];
+        $newRevisionAttendance['punch_out_at'] = $request->date . $newRevisionAttendance['punch_out_at'];
         $revisionAttendance = RevisionAttendance::create($newRevisionAttendance);
         $newRevisionBreakTimes = $request->break_times;
         if ($request->new_break_time['start_break_at'] && $request->new_break_time['end_break_at']) {
@@ -20,6 +22,8 @@ class RevisionAttendanceController extends Controller
         if ($newRevisionBreakTimes) {
             foreach ($newRevisionBreakTimes as $newRevisionBreakTime) {
                 $newRevisionBreakTime['revision_attendance_id'] = $revisionAttendance['id'];
+                $newRevisionBreakTime['start_break_at'] = $request->date . $newRevisionBreakTime['start_break_at'];
+                $newRevisionBreakTime['end_break_at'] = $request->date . $newRevisionBreakTime['end_break_at'];
                 RevisionBreakTime::create($newRevisionBreakTime);
             }
         }
