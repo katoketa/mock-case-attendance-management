@@ -47,7 +47,7 @@
     width: 300px;
 }
 
-.detail-table__input {
+.detail-table__input-time {
     text-align: center;
     width: 100px;
     font-size: 16px;
@@ -63,14 +63,14 @@
     resize: none;
 }
 
-.detail-table__input--empty {
+.detail-table__input-time--empty {
     color: transparent;
 }
 
-.detail-table__input:focus {
+.detail-table__input-time:focus {
     color: black;
 }
 
-.detail-table__input[type="time"]::-webkit-calendar-picker-indicator {
+.detail-table__input-time[type="time"]::-webkit-calendar-picker-indicator {
     display: none;
 }

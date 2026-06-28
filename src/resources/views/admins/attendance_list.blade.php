@@ -21,7 +21,7 @@
         <tr class="default-table__tr">
             <td class="default-table__td">{{ $attendance['user']['name'] }}</td>
             <td class="default-table__td">{{ $attendance['punch_in_at']->format('H:i') }}</td>
-            <td class="default-table__td">{{ $attendance['punch_out_at']->format('H:i') }}</td>
+            <td class="default-table__td">{{ !empty($attendance['punch_out_at']) ? $attendance['punch_out_at']->format('H:i') : '' }}</td>
             <td class="default-table__td">{{ sprintf('%d:%02d', (int)$attendance->totalBreakTimeMinute() / 60, $attendance->totalBreakTimeMinute() % 60) }}</td>
             <td class="default-table__td">{{ sprintf('%d:%02d', (int)$attendance->totalWorkTimeMinute() / 60, $attendance->totalWorkTimeMinute() % 60) }}</td>
             <td class="default-table__td">

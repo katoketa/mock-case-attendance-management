@@ -4,6 +4,7 @@ use App\Http\Controllers\AdminAttendanceController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AttendanceController;
 use App\Http\Controllers\RevisionAttendanceController;
+use App\Http\Controllers\RegisterAttendanceController;
 use App\Http\Controllers\AdminAuthController;
 
 Route::get('/', function () {
@@ -32,5 +33,6 @@ Route::name('admin.')->group(function () {
         Route::post('/admin/logout', [AdminAuthController::class, 'logout'])->name('logout');
         Route::get('/admin/attendance/list', [AdminAttendanceController::class, 'index'])->name('attendance.index');
         Route::get('/admin/attendance/{attendance}', [AdminAttendanceController::class, 'show'])->name('attendance.show');
+        Route::post('/admin/attendance/update', [AdminAttendanceController::class, 'update'])->name('attendance.update');
     });
 });

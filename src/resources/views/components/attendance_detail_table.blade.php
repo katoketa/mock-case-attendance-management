@@ -1,4 +1,8 @@
 {{-- $userと$showDataと$breakTimesと$canEditを親viewが持つか渡される必要がある --}}
+@if ($canEdit)
+<input type="hidden" name="attendance_id" value="{{ $showData['id'] }}">
+<input type="hidden" name="date" value="{{ $showData['punch_in_at']->format('Y-m-d ') }}">
+@endif
 <table class="detail-table">
     <tr class="detail-table__tr">
         <th class="detail-table__th">名前</th>
@@ -21,9 +25,9 @@
         <td class="detail-table__td">
             <div class="detail-table__td-flex">
                 @if ($canEdit)
-                <input type="time" name="punch_in_at" id="" class="detail-table__input" value="{{ $showData['punch_in_at']->format('H:i') }}">
+                <input type="time" name="punch_in_at" id="" class="detail-table__input-time" value="{{ $showData['punch_in_at']->format('H:i') }}">
                 <span class="detail-table__td-span"></span>
-                <input type="time" name="punch_out_at" id="" class="detail-table__input" value="{{ $showData['punch_out_at']->format('H:i') }}">
+                <input type="time" name="punch_out_at" id="" class="detail-table__input-time" value="{{ !empty($showData['punch_out_at']) ? $showData['punch_out_at']->format('H:i') : '' }}">
                 @else
                 <span class="detail-table__td-span">{{ $showData['punch_in_at']->format('H:i') }}</span>
                 <span class="detail-table__td-span">〜</span>
@@ -47,9 +51,9 @@
         <td class="detail-table__td">
             <div class="detail-table__td-flex">
                 @if ($canEdit)
-                <input type="time" name="break_times[{{ $breaktime_i }}][start_break_at]" id="" class="detail-table__input" value="{{ $breakTime['start_break_at']->format('H:i') }}">
+                <input type="time" name="break_times[{{ $breaktime_i }}][start_break_at]" id="" class="detail-table__input-time" value="{{ $breakTime['start_break_at']->format('H:i') }}">
                 <span class="detail-table__td-span">〜</span>
-                <input type="time" name="break_times[{{ $breaktime_i }}][end_break_at]" id="" class="detail-table__input" value="{{ $breakTime['end_break_at']->format('H:i') }}">
+                <input type="time" name="break_times[{{ $breaktime_i }}][end_break_at]" id="" class="detail-table__input-time" value="{{ !empty($breakTime['end_break_at']) ? $breakTime['end_break_at']->format('H:i') : '' }}">
                 @else
                 <span class="detail-table__td-span">{{ $breakTime['start_break_at']->format('H:i') }}</span>
                 <span class="detail-table__td-span">〜</span>
@@ -72,9 +76,9 @@
         <td class="detail-table__td">
             <div class="detail-table__td-flex">
                 @if ($canEdit)
-                <input type="time" name="new_break_time[start_break_at]" id="" class="detail-table__input" value="{{ $showData['new_start_break_at'] }}">
+                <input type="time" name="new_break_time[start_break_at]" id="" class="detail-table__input-time" value="{{ $showData['new_start_break_at'] }}">
                 <span class="detail-table__td-span">〜</span>
-                <input type="time" name="new_break_time[end_break_at]" id="" class="detail-table__input" value="{{ $showData['new_end_break_at'] }}">
+                <input type="time" name="new_break_time[end_break_at]" id="" class="detail-table__input-time" value="{{ $showData['new_end_break_at'] }}">
                 @else
                 <td class="detail-table__td"></td>
                 @endif
@@ -95,7 +99,7 @@
     </tr>
 </table>
 
-@section('script')
+@push('scripts')
 <script>
     const toggleClassIfEmpty = (element, className) => {
         if (element.value === "") {
@@ -104,12 +108,12 @@
             element.classList.remove(className);
         }
     }
-    const elements = document.getElementsByClassName('detail-table__input');
+    const elements = document.getElementsByClassName('detail-table__input-time');
     for (const element of elements) {
-        toggleClassIfEmpty(element, "detail-table__input--empty");
+        toggleClassIfEmpty(element, "detail-table__input-time--empty");
         element.addEventListener('blur', () => {
-            toggleClassIfEmpty(element, "detail-table__input--empty");
+            toggleClassIfEmpty(element, "detail-table__input-time--empty");
         });
     }
 </script>
-@endsection
+@endpush
