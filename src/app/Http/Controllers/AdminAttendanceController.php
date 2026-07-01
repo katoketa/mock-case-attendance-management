@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Carbon\CarbonImmutable;
 use App\Models\Attendance;
 use App\Models\BreakTime;
+use App\Models\User;
 
 class AdminAttendanceController extends Controller
 {
@@ -62,5 +63,11 @@ class AdminAttendanceController extends Controller
         }
 
         return redirect()->route('admin.attendance.show', ['attendance' => $request->attendance_id]);
+    }
+
+    public function staffIndex()
+    {
+        $users = User::all();
+        return view('admins.staff_list', compact('users'));
     }
 }
