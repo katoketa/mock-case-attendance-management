@@ -38,7 +38,7 @@
                     <a href="admin/attendance/list" class="header-nav__a">勤怠一覧</a>
                 </li>
                 <li class="header-nav__li">
-                    <a href="admin/staff/list" class="header-nav__a">スタッフ一覧</a>
+                    <a href="{{ route('admin.staff.index') }}" class="header-nav__a">スタッフ一覧</a>
                 </li>
                 <li class="header-nav__li">
                     <a href="{{ route('revision_attendance.index') }}" class="header-nav__a">申請一覧</a>
