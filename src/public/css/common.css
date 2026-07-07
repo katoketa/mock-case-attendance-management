@@ -68,6 +68,10 @@ input, textarea, button {
     background: #000;
 }
 
+.default-table__alert {
+    color: red;
+}
+
 .default-table {
     width: 100%;
     color: #737373;

@@ -70,4 +70,18 @@ class AdminAttendanceController extends Controller
         $users = User::all();
         return view('admins.staff_list', compact('users'));
     }
+
+    public function staffShow(User $user, Request $request)
+    {
+        if (!empty($request->date)) {
+            $selectDate = new CarbonImmutable($request->date);
+        } else {
+            $selectDate = CarbonImmutable::now()->startOfMonth();
+        }
+        $attendances = $user->attendances()->where('punch_in_at', 'like', $selectDate->format('Y-m') . '%')->orderBy('punch_in_at', 'asc')->get();
+        $attendances->load('breakTimes');
+        $userName = $user['name'];
+        $alert = $request->alert;
+        return view('/admins/staff_attendance', compact('selectDate', 'attendances', 'userName', 'alert'));
+    }
 }
