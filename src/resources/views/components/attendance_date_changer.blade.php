@@ -1,5 +1,7 @@
 {{-- 必要なデータ：selectInterval('day'または'month') --}}
-{{-- 親bladeファイルにてcss/attendance_date_changer.cssを読み込んでください --}}
+@push('css')
+<link rel="stylesheet" href="{{ asset('css/attendance_date_changer.css') }}">
+@endpush
 <ul class="date-changer__ul">
     <li class="date-changer__li">
         @if ($selectInterval === 'month')

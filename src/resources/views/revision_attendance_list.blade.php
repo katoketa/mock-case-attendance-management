@@ -1,8 +1,8 @@
 @extends('layouts/app')
 
-@section('css')
+@push('css')
 <link rel="stylesheet" href="{{ asset('css/revision_attendance_list.css') }}">
-@endsection
+@endpush
 
 @section('content')
 <article class="default-page">

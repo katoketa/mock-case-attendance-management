@@ -14,7 +14,7 @@
             <td class="default-table__td">{{ $user['name'] }}</td>
             <td class="default-table__td">{{ $user['email'] }}</td>
             <td class="default-table__td">
-                <a href="{{ route('admin.staff.show" class="default-table__a">詳細</a>
+                <a href="{{ route('admin.staff.show', ['user' => $user['id']]) }}" class="default-table__a">詳細</a>
             </td>
         </tr>
         @endforeach

@@ -1,8 +1,8 @@
 @extends('layouts.app')
 
-@section('css')
+@push('css')
 <link rel="stylesheet" href="{{ asset('css/attendance.css') }}">
-@endsection
+@endpush
 
 @section('content')
 @php

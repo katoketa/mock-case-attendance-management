@@ -18,7 +18,8 @@ class AttendanceController extends Controller
         }
         $attendances = Auth::user()->attendances()->where('punch_in_at', 'like', $selectDate->format('Y-m') . '%')->orderBy('punch_in_at', 'asc')->get();
         $attendances->load('breakTimes');
-        return view('users.attendance_list', compact('selectDate', 'attendances'));
+        $alert = $request->alert;
+        return view('users.attendance_list', compact('selectDate', 'attendances', 'alert'));
     }
 
     public function show(Attendance $attendance)
