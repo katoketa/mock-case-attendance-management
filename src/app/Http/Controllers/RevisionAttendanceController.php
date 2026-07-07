@@ -32,13 +32,21 @@ class RevisionAttendanceController extends Controller
 
     public function index(Request $request)
     {
-        $user = Auth::user();
-        if ($request->select === "approved") {
-            $revisionAttendances = $user->revisionAttendances()->where('is_approval', true)->get();
-        } else {
-            $revisionAttendances = $user->revisionAttendances()->where('is_approval', false)->get();
+        if (Auth::guard('web')->check()) {
+            $user = Auth::user();
+            if ($request->select === "approved") {
+                $revisionAttendances = $user->revisionAttendances()->where('is_approval', true)->get();
+            } else {
+                $revisionAttendances = $user->revisionAttendances()->where('is_approval', false)->get();
+            }
+        } elseif (Auth::guard('admin')->check()) {
+            if ($request->select === "approved") {
+                $revisionAttendances = RevisionAttendance::where('is_approval', true)->get();
+            } else {
+                $revisionAttendances = RevisionAttendance::where('is_approval', false)->get();
+            }
         }
-        $select = $request->select;
+                    $select = $request->select;
         return view('revision_attendance_list', compact('revisionAttendances', 'select'));
     }
 
@@ -46,5 +54,13 @@ class RevisionAttendanceController extends Controller
     {
         $attendance = $revisionAttendance->attendance;
         return redirect()->route('attendance.show', ['attendance' => $attendance['id']]);
+    }
+
+    public function edit(RevisionAttendance $revisionAttendance)
+    {
+        $showData = $revisionAttendance;
+        $user = $revisionAttendance['attendance']['user'];
+        $breakTimes = $revisionAttendance['revisionBreakTimes'];
+        return view('/admins/revision_attendance_approve', compact('user', 'showData', 'breakTimes'));
     }
 }

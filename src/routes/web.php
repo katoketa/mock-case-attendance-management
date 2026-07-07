@@ -7,8 +7,8 @@ use App\Http\Controllers\RevisionAttendanceController;
 use App\Http\Controllers\RegisterAttendanceController;
 use App\Http\Controllers\AdminAuthController;
 
-Route::get('/', function () {
-    return view('welcome');
+Route::middleware('auth:web,admin')->group(function () {
+    Route::get('/stamp_correction_request/list', [RevisionAttendanceController::class, 'index'])->name('revision_attendance.index');
 });
 
 Route::middleware('auth:web')->group(function () {
@@ -20,7 +20,6 @@ Route::middleware('auth:web')->group(function () {
     Route::get('/attendance/list', [AttendanceController::class, 'index'])->name('attendance.index');
     Route::get('/attendance/detail/{attendance}', [AttendanceController::class, 'show'])->name('attendance.show');
     Route::post('attendance/revision_request', [RevisionAttendanceController::class, 'store'])->name('revision_attendance.store');
-    Route::get('/stamp_correction_request/list', [RevisionAttendanceController::class, 'index'])->name('revision_attendance.index');
     Route::get('/stamp_correction_request/approve/{revisionAttendance}', [RevisionAttendanceController::class, 'show'])->name('revision_attendance.show');
 });
 
@@ -36,5 +35,6 @@ Route::name('admin.')->group(function () {
         Route::post('/admin/attendance/update', [AdminAttendanceController::class, 'update'])->name('attendance.update');
         Route::get('/admin/staff/list', [AdminAttendanceController::class, 'staffIndex'])->name('staff.index');
         Route::get('/admin/attendance/staff/{user}', [AdminAttendanceController::class, 'staffShow'])->name('staff.show');
+        Route::get('/stamp_correction_request/approve/{revisionAttendance}', [RevisionAttendanceController::class, 'edit'])->name('revision_attendance.edit');
     });
 });

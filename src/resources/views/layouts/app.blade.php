@@ -15,36 +15,48 @@
 
 <body class="body">
     <header class="header">
-        <div class="header-logo">
+        @if (Auth::guard('admin')->check())
+        <a href="{{ route('admin.index') }}" class="header-logo">
             <img src="{{ asset('image/COACHTECHヘッダーロゴ.png') }}" alt="coachtech" class="header-logo__img">
-        </div>
+        </a>
+        @else
+        <a href="{{ route('attendance.create') }}" class="header-logo">
+            <img src="{{ asset('image/COACHTECHヘッダーロゴ.png') }}" alt="coachtech" class="header-logo__img">
+        </a>
+        @endif
         <nav>
             <ul class="header-nav__ul">
                 @if (Auth::guard('web')->check())
                 <li class="header-nav__li">
-                    <a href="{{ route('attendance.create') }}" class="header-nav__a">勤怠</a>
+                    <a href="{{ route('attendance.create') }}" class="header-nav__link">勤怠</a>
                 </li>
                 <li class="header-nav__li">
-                    <a href="{{ route('attendance.index') }}" class="header-nav__a">勤怠一覧</a>
+                    <a href="{{ route('attendance.index') }}" class="header-nav__link">勤怠一覧</a>
                 </li>
                 <li class="header-nav__li">
-                    <a href="{{ route('revision_attendance.index') }}" class="header-nav__a">申請</a>
+                    <a href="{{ route('revision_attendance.index') }}" class="header-nav__link">申請</a>
                 </li>
                 <li class="header-nav__li">
-                    <a href="/logout" class="header-nav__a">ログアウト</a>
+                    <form action="/logout" method="post">
+                        @csrf
+                        <button type="submit" class="header-nav__link">ログアウト</button>
+                    </form>
                 </li>
                 @elseif (Auth::guard('admin')->check())
                 <li class="header-nav__li">
-                    <a href="admin/attendance/list" class="header-nav__a">勤怠一覧</a>
+                    <a href="admin/attendance/list" class="header-nav__link">勤怠一覧</a>
                 </li>
                 <li class="header-nav__li">
-                    <a href="{{ route('admin.staff.index') }}" class="header-nav__a">スタッフ一覧</a>
+                    <a href="{{ route('admin.staff.index') }}" class="header-nav__link">スタッフ一覧</a>
                 </li>
                 <li class="header-nav__li">
-                    <a href="{{ route('revision_attendance.index') }}" class="header-nav__a">申請一覧</a>
+                    <a href="{{ route('revision_attendance.index') }}" class="header-nav__link">申請一覧</a>
                 </li>
                 <li class="header-nav__li">
-                    <a href="/logout" class="header-nav__a">ログアウト</a>
+                    <form action="{{ route('admin.logout') }}" method="post">
+                        @csrf
+                        <button type="submit" class="header-nav__link">ログアウト</button>
+                    </form>
                 </li>
                 @endif
             </ul>

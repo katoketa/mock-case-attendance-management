@@ -26,4 +26,11 @@ class AdminAuthController extends Controller
         {
             return redirect()->route('admin.attendance.index');
         }
+
+        public function logout()
+        {
+            Auth::guard('admin')->logout();
+
+            return redirect()->route('admin.login');
+        }
 }

@@ -36,6 +36,7 @@ class RevisionAttendanceSeeder extends Seeder
                     'punch_out_at' => $punchOutAt,
                     'remarks' => fake()->realText(30),
                     'is_approval' => $isApproval,
+                    'created_at' => now(),
                 ];
             }
         }

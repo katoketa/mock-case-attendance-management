@@ -1,4 +1,7 @@
 {{-- $userと$showDataと$breakTimesと$canEditを親viewが持つか渡される必要がある --}}
+@push('css')
+<link rel="stylesheet" href="{{ asset('css/attendance_detail_table.css') }}">
+@endpush
 @if ($canEdit)
 <input type="hidden" name="attendance_id" value="{{ $showData['id'] }}">
 <input type="hidden" name="date" value="{{ $showData['punch_in_at']->format('Y-m-d ') }}">

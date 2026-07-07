@@ -1,9 +1,5 @@
 @extends('layouts.app')
 
-@push('css')
-<link rel="stylesheet" href="{{ asset('css/attendance_detail_table.css') }}">
-@endpush
-
 @section('content')
 <article class="default-page">
     <h1 class="default-title">勤怠詳細</h1>
