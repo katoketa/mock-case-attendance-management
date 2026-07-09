@@ -136,6 +136,11 @@ input, textarea, button {
     cursor: pointer;
 }
 
+.default-button__submit:disabled {
+    background-color: #696969;
+    cursor: auto;
+}
+
 .pending-approval__message {
     width: 100%;
     margin-top: 30px;

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\RevisionAttendance;
 use App\Models\RevisionBreakTime;
+use App\Models\BreakTime;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -62,5 +63,36 @@ class RevisionAttendanceController extends Controller
         $user = $revisionAttendance['attendance']['user'];
         $breakTimes = $revisionAttendance['revisionBreakTimes'];
         return view('/admins/revision_attendance_approve', compact('user', 'showData', 'breakTimes'));
+    }
+
+    public function update(RevisionAttendance $revisionAttendance)
+    {
+        $attendance = $revisionAttendance['attendance'];
+        $newAttendance = [
+            'punch_in_at' => $revisionAttendance['punch_in_at'],
+            'punch_out_at' => $revisionAttendance['punch_out_at'],
+            'remarks' => $revisionAttendance['remarks'],
+        ];
+        $attendance->update($newAttendance);
+        $breakTimes = $attendance['breakTimes'];
+        $revisionBreakTimes = $revisionAttendance['revisionBreakTimes'];
+        foreach ($breakTimes as $key => $breakTime) {
+            $newBreakTime = [
+                'start_break_at' => $revisionBreakTimes[$key]['start_break_at'],
+                'end_break_at' => $revisionBreakTimes[$key]['end_break_at'],
+            ];
+            $breakTime->update($newBreakTime);
+        }
+        if (count($breakTimes) < count($revisionBreakTimes)) {
+            $length = count($revisionBreakTimes);
+            $newBreakTime = [
+                'attendance_id' => $attendance['id'],
+                'start_break_at' => $revisionBreakTimes[$length - 1]['start_break_at'],
+                'end_break_at' => $revisionBreakTimes[$length - 1]['end_break_at'],
+            ];
+            BreakTime::create($newBreakTime);
+        }
+        $revisionAttendance->update(['is_approval' => true]);
+        return redirect()->route('admin.revision_attendance.edit', ['revisionAttendance' => $revisionAttendance['id']]);
     }
 }
