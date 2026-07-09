@@ -44,7 +44,7 @@
                 </li>
                 @elseif (Auth::guard('admin')->check())
                 <li class="header-nav__li">
-                    <a href="admin/attendance/list" class="header-nav__link">勤怠一覧</a>
+                    <a href="{{ route('admin.attendance.index') }}" class="header-nav__link">勤怠一覧</a>
                 </li>
                 <li class="header-nav__li">
                     <a href="{{ route('admin.staff.index') }}" class="header-nav__link">スタッフ一覧</a>

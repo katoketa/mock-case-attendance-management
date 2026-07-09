@@ -36,5 +36,6 @@ Route::name('admin.')->group(function () {
         Route::get('/admin/staff/list', [AdminAttendanceController::class, 'staffIndex'])->name('staff.index');
         Route::get('/admin/attendance/staff/{user}', [AdminAttendanceController::class, 'staffShow'])->name('staff.show');
         Route::get('/stamp_correction_request/approve/{revisionAttendance}', [RevisionAttendanceController::class, 'edit'])->name('revision_attendance.edit');
+        Route::post('/stamp_correction_request/approve/{revisionAttendance}', [RevisionAttendanceController::class, 'update'])->name('revision_attendance.update');
     });
 });
