@@ -5,6 +5,11 @@
 @endpush
 
 @section('content')
+@php
+if (!empty($error)) {
+dd($error);
+}
+@endphp
 <article class="auth-page">
     <h1 class="auth-page__title">管理者ログイン</h1>
     <form action="{{ route('admin.execute') }}" method="post" class="auth-form" novalidate>
@@ -14,6 +19,9 @@
         @error('email')
         <div class="default-error-message">{{ $message }}</div>
         @enderror
+        @if (!empty(session('login_failed_message')))
+        <div class="default-error-message">{{ session('login_failed_message') }}</div>
+        @endif
         <label for="password" class="auth-form__label">パスワード</label>
         <input type="password" name="password" id="password" class="auth-form__input">
         @error('password')

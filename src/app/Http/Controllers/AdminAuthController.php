@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Http\Requests\AdminLoginRequest;
 use Illuminate\Support\Facades\Auth;
 
 class AdminAuthController extends Controller
@@ -12,14 +12,14 @@ class AdminAuthController extends Controller
             return view('admins.auth.login');
         }
 
-        public function login(Request $request)
+        public function login(AdminLoginRequest $request)
         {
             $credentials = $request->only('email', 'password');
             if (Auth::guard('admin')->attempt($credentials)) {
                 return redirect()->intended(route('admin.index'));
             }
 
-            return back()->withInput();
+            return back()->withInput()->with('login_failed_message', 'ログイン情報が登録されていません');
         }
 
         public function index()

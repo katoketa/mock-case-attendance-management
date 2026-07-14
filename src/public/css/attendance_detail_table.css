@@ -50,6 +50,7 @@
 .detail-table__input-time {
     text-align: center;
     width: 100px;
+    height: 30px;
     font-size: 16px;
     font-weight: bold;
 }
@@ -73,4 +74,13 @@
 
 .detail-table__input-time[type="time"]::-webkit-calendar-picker-indicator {
     display: none;
+}
+
+.detail-table__error-ul {
+    font-size: 10px;
+    color: red;
+}
+
+.detail-table__error-li {
+
 }
