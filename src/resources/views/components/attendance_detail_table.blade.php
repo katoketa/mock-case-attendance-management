@@ -29,8 +29,16 @@
             <div class="detail-table__td-flex">
                 @if ($canEdit)
                 <input type="time" name="punch_in_at" id="" class="detail-table__input-time" value="{{ $showData['punch_in_at']->format('H:i') }}">
-                <span class="detail-table__td-span"></span>
+                <span class="detail-table__td-span">〜</span>
                 <input type="time" name="punch_out_at" id="" class="detail-table__input-time" value="{{ !empty($showData['punch_out_at']) ? $showData['punch_out_at']->format('H:i') : '' }}">
+                <ul class="detail-table__error-ul">
+                    @error('punch_in_at')
+                    <li class="detail-table__error-li">{{ $message }}</li>
+                    @enderror
+                    @error('punch_out_at')
+                    <li class="detail-table__error-li">{{ $message }}</li>
+                    @enderror
+                </ul>
                 @else
                 <span class="detail-table__td-span">{{ $showData['punch_in_at']->format('H:i') }}</span>
                 <span class="detail-table__td-span">〜</span>
@@ -57,6 +65,14 @@
                 <input type="time" name="break_times[{{ $breaktime_i }}][start_break_at]" id="" class="detail-table__input-time" value="{{ $breakTime['start_break_at']->format('H:i') }}">
                 <span class="detail-table__td-span">〜</span>
                 <input type="time" name="break_times[{{ $breaktime_i }}][end_break_at]" id="" class="detail-table__input-time" value="{{ !empty($breakTime['end_break_at']) ? $breakTime['end_break_at']->format('H:i') : '' }}">
+                <ul class="detail-table__error-ul">
+                    @error('break_times.' . $breaktime_i . '.start_break_at')
+                    <li class="detail-table__error-li">{{ $message }}</li>
+                    @enderror
+                    @error('break_times.' . $breaktime_i . '.end_break_at')
+                    <li class="detail-table__error-li">{{ $message }}</li>
+                    @enderror
+                </ul>
                 @else
                 <span class="detail-table__td-span">{{ $breakTime['start_break_at']->format('H:i') }}</span>
                 <span class="detail-table__td-span">〜</span>
@@ -79,11 +95,17 @@
         <td class="detail-table__td">
             <div class="detail-table__td-flex">
                 @if ($canEdit)
-                <input type="time" name="new_break_time[start_break_at]" id="" class="detail-table__input-time" value="{{ $showData['new_start_break_at'] }}">
+                <input type="time" name="new_break_time[start_break_at]" id="" class="detail-table__input-time">
                 <span class="detail-table__td-span">〜</span>
-                <input type="time" name="new_break_time[end_break_at]" id="" class="detail-table__input-time" value="{{ $showData['new_end_break_at'] }}">
-                @else
-                <td class="detail-table__td"></td>
+                <input type="time" name="new_break_time[end_break_at]" id="" class="detail-table__input-time">
+                <ul class="detail-table__error-ul">
+                    @error('new_break_time.start_break_at')
+                    <li class="detail-table__error-li">{{ $message }}</li>
+                    @enderror
+                    @error('new_break_time.end_break_at')
+                    <li class="detail-table__error-li">{{ $message }}</li>
+                    @enderror
+                </ul>
                 @endif
             </div>
         </td>
@@ -93,6 +115,11 @@
         @if ($canEdit)
         <td class="detail-table__td">
             <textarea name="remarks" id="" class="detail-table__textarea">{{ $showData['remarks'] }}</textarea>
+            <ul class="detail-table__error-ul">
+                @error('remarks')
+                <li class="detail-table__error-li">{{ $message }}</li>
+                @enderror
+            </ul>
         </td>
         @else
         <td class="detail-table__td">

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\RevisionAttendanceRequest;
 use App\Models\RevisionAttendance;
 use App\Models\RevisionBreakTime;
 use App\Models\BreakTime;
@@ -10,7 +11,7 @@ use Illuminate\Support\Facades\Auth;
 
 class RevisionAttendanceController extends Controller
 {
-    public function store(Request $request)
+    public function store(RevisionAttendanceRequest $request)
     {
         $newRevisionAttendance = $request->only('attendance_id', 'punch_in_at', 'punch_out_at', 'remarks');
         $newRevisionAttendance['punch_in_at'] = $request->date . $newRevisionAttendance['punch_in_at'];
@@ -47,7 +48,8 @@ class RevisionAttendanceController extends Controller
                 $revisionAttendances = RevisionAttendance::where('is_approval', false)->get();
             }
         }
-                    $select = $request->select;
+        $revisionAttendances->load('attendance', 'attendance.user');
+        $select = $request->select;
         return view('revision_attendance_list', compact('revisionAttendances', 'select'));
     }
 

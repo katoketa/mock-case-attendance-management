@@ -58,7 +58,7 @@
             </td>
             <td class="default-table__td align-left">
                 @if (Auth::guard('web')->check())
-                <a href="{{ route('revision_attendance.show', ['revisionAttendance' => $revisionAttendance['id']]) }}" class="default-table__a">詳細</a>
+                <a href="{{ route('attendance.show', ['attendance' => $revisionAttendance['attendance_id']]) }}" class="default-table__a">詳細</a>
                 @elseif (Auth::guard('admin')->check())
                 <a href="{{ route('admin.revision_attendance.edit', ['revisionAttendance' => $revisionAttendance['id']]) }}" class="default-table__a">詳細</a>
                 @endif

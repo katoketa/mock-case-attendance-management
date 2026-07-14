@@ -148,3 +148,7 @@ input, textarea, button {
     font-size: 16px;
     text-align: right;
 }
+
+.default-error-message {
+    color: red;
+}

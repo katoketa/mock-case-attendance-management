@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\RevisionAttendanceRequest;
 use Illuminate\Http\Request;
 use Carbon\CarbonImmutable;
 use App\Models\Attendance;
@@ -40,7 +41,7 @@ class AdminAttendanceController extends Controller
         return view('/admins/attendance_detail', compact('user', 'showData', 'breakTimes', 'canEdit'));
     }
 
-    public function update(Request $request)
+    public function update(RevisionAttendanceRequest $request)
     {
         $newAttendance = $request->only('punch_in_at', 'punch_out_at', 'remarks');
         $newAttendance['punch_in_at'] = $request->date . $newAttendance['punch_in_at'];
