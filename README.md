@@ -1,9 +1,9 @@
 # coachtech 勤怠管理アプリ
 ## 環境構築
 ### Dockerビルド
-- `git@github.com:katoketa/mock-case-attendance-management.git`
+- `git clone git@github.com:katoketa/mock-case-attendance-management.git`
 - `cd mock-case-attendance-management`
-- `docker-compose up --d --build`
+- `docker-compose up -d --build`
 ### Laravel環境構築
 - `docker-compose exec php bash`
 - `composer install`
