@@ -16,7 +16,7 @@ class AdminAuthController extends Controller
         {
             $credentials = $request->only('email', 'password');
             if (Auth::guard('admin')->attempt($credentials)) {
-                return redirect()->intended(route('admin.index'));
+                return redirect()->route('admin.index');
             }
 
             return back()->withInput()->with('login_failed_message', 'ログイン情報が登録されていません');

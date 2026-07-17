@@ -28,8 +28,6 @@ class AttendanceController extends Controller
             redirect()->route('attendance.index');
         }
 
-        // 出勤飲み押した状態でloadするとbreakTimesが存在しないのでエラーが発生する
-        // $attendance->load('latestAttendance', 'breakTimes');
         $user = Auth::user();
         $canEdit = $attendance->latestRevisionAttendance['is_approval'] ?? true;
         if ($canEdit) {
