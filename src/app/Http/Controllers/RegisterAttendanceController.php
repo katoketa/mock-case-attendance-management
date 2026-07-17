@@ -9,6 +9,11 @@ use App\Models\Attendance;
 
 class RegisterAttendanceController extends Controller
 {
+    public function index()
+    {
+        return redirect()->route('attendance.create');
+    }
+
     public function create()
     {
         $user = Auth::user();

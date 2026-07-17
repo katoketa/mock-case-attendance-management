@@ -12,6 +12,7 @@ Route::middleware('auth:web,admin')->group(function () {
 });
 
 Route::middleware('auth:web')->group(function () {
+    Route::get('/', [RegisterAttendanceController::class, 'index']);
     Route::get('/attendance', [RegisterAttendanceController::class, 'create'])->name('attendance.create');
     Route::post('/attendance/punch_in', [RegisterAttendanceController::class, 'punchIn'])->name('attendance.punch_in');
     Route::post('/attendance/punch_out', [RegisterAttendanceController::class, 'punchOut'])->name('attendance.punch_out');
