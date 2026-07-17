@@ -5,14 +5,9 @@
 @endpush
 
 @section('content')
-@php
-if (!empty($error)) {
-dd($error);
-}
-@endphp
 <article class="auth-page">
     <h1 class="auth-page__title">管理者ログイン</h1>
-    <form action="{{ route('admin.execute') }}" method="post" class="auth-form" novalidate>
+    <form action="{{ route('admin.execute') }}" method="post" novalidate>
         @csrf
         <label for="email" class="auth-form__label">メールアドレス</label>
         <input type="email" name="email" id="email" class="auth-form__input" value="{{ old('email') }}">
