@@ -17,11 +17,11 @@
     <header class="header">
         @if (Auth::guard('admin')->check())
         <a href="{{ route('admin.index') }}" class="header-logo">
-            <img src="{{ asset('image/COACHTECHヘッダーロゴ.png') }}" alt="coachtech" class="header-logo__img">
+            <img src="{{ asset('image/COACHTECHヘッダーロゴ.png') }}" alt="coachtech">
         </a>
         @else
         <a href="{{ route('attendance.create') }}" class="header-logo">
-            <img src="{{ asset('image/COACHTECHヘッダーロゴ.png') }}" alt="coachtech" class="header-logo__img">
+            <img src="{{ asset('image/COACHTECHヘッダーロゴ.png') }}" alt="coachtech">
         </a>
         @endif
         <nav>

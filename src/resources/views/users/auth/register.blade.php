@@ -7,7 +7,7 @@
 @section('content')
 <article class="auth-page">
     <h1 class="auth-page__title">会員登録</h1>
-    <form action="/register" method="post" class="auth-form" novalidate>
+    <form action="/register" method="post" novalidate>
         @csrf
         <label for="name" class="auth-form__label">名前</label>
         <input type="text" name="name" id="name" class="auth-form__input" value="{{ old('name') }}">

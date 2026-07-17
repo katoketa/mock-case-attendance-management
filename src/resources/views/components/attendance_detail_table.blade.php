@@ -33,10 +33,10 @@
                 <input type="time" name="punch_out_at" id="" class="detail-table__input-time" value="{{ !empty($showData['punch_out_at']) ? $showData['punch_out_at']->format('H:i') : '' }}">
                 <ul class="detail-table__error-ul">
                     @error('punch_in_at')
-                    <li class="detail-table__error-li">{{ $message }}</li>
+                    <li>{{ $message }}</li>
                     @enderror
                     @error('punch_out_at')
-                    <li class="detail-table__error-li">{{ $message }}</li>
+                    <li>{{ $message }}</li>
                     @enderror
                 </ul>
                 @else
@@ -67,10 +67,10 @@
                 <input type="time" name="break_times[{{ $breaktime_i }}][end_break_at]" id="" class="detail-table__input-time" value="{{ !empty($breakTime['end_break_at']) ? $breakTime['end_break_at']->format('H:i') : '' }}">
                 <ul class="detail-table__error-ul">
                     @error('break_times.' . $breaktime_i . '.start_break_at')
-                    <li class="detail-table__error-li">{{ $message }}</li>
+                    <li>{{ $message }}</li>
                     @enderror
                     @error('break_times.' . $breaktime_i . '.end_break_at')
-                    <li class="detail-table__error-li">{{ $message }}</li>
+                    <li>{{ $message }}</li>
                     @enderror
                 </ul>
                 @else
@@ -100,10 +100,10 @@
                 <input type="time" name="new_break_time[end_break_at]" id="" class="detail-table__input-time">
                 <ul class="detail-table__error-ul">
                     @error('new_break_time.start_break_at')
-                    <li class="detail-table__error-li">{{ $message }}</li>
+                    <li>{{ $message }}</li>
                     @enderror
                     @error('new_break_time.end_break_at')
-                    <li class="detail-table__error-li">{{ $message }}</li>
+                    <li>{{ $message }}</li>
                     @enderror
                 </ul>
                 @endif
@@ -117,7 +117,7 @@
             <textarea name="remarks" id="" class="detail-table__textarea">{{ $showData['remarks'] }}</textarea>
             <ul class="detail-table__error-ul">
                 @error('remarks')
-                <li class="detail-table__error-li">{{ $message }}</li>
+                <li>{{ $message }}</li>
                 @enderror
             </ul>
         </td>

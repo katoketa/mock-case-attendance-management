@@ -1,9 +1,5 @@
 @extends('layouts.app')
 
-@push('css')
-<link rel="stylesheet" href="{{ asset('css/attendance_date_changer.css') }}">
-@endpush
-
 @section('content')
 <article class="default-page">
     <h1 class="default-title">{{ $selectDate->format('Y年m月d日') }}の勤怠</h1>

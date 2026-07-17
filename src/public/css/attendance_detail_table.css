@@ -7,10 +7,6 @@
     letter-spacing: 0.2em;
 }
 
-.detail-table__tr {
-
-}
-
 .detail-table__th {
     padding: 30px 0 30px 50px;
     color: #7D7D7D;
@@ -79,8 +75,4 @@
 .detail-table__error-ul {
     font-size: 10px;
     color: red;
-}
-
-.detail-table__error-li {
-
 }
